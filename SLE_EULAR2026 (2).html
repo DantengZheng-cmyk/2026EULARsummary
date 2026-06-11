@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EULAR 2026 · SLE 研究彙整</title>
+<style>
+:root{
+  --ink:#1a2236; --ink-soft:#46506a; --muted:#8590a8;
+  --paper:#f4f6fb; --card:#ffffff; --line:#e2e7f1;
+  --primary:#1f4e79; --primary-2:#2e6da4; --accent:#b5462f; --accent-soft:#f3e3df;
+  --gold:#b8893b; --gold-soft:#f6edda;
+  --clin:#1f4e79; --clin-bg:#e8f0f9;
+  --rw:#2f7a5b; --rw-bg:#e4f2ea;
+  --gl:#7a4f9e; --gl-bg:#efe7f6;
+  --star:#c8962a;
+  --shadow:0 1px 3px rgba(26,34,54,.07),0 6px 20px rgba(26,34,54,.06);
+  --shadow-lg:0 10px 40px rgba(26,34,54,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  background:var(--paper); color:var(--ink); line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:Georgia,"Times New Roman",serif}
+
+/* ===== top bar ===== */
+header{
+  background:linear-gradient(110deg,#15375a 0%,#1f4e79 55%,#2e6da4 100%);
+  color:#fff; padding:14px 26px; display:flex; align-items:center; gap:22px;
+  position:sticky; top:0; z-index:50; box-shadow:0 2px 14px rgba(21,55,90,.25);
+}
+header .logo{font-weight:800; font-size:18px; letter-spacing:.5px; white-space:nowrap}
+header .logo b{color:#ffd98a}
+header .sub{font-size:12.5px; color:#bcd4ea; border-left:1px solid rgba(255,255,255,.25); padding-left:18px}
+header .spacer{flex:1}
+.tabs{display:flex; gap:11px}
+.tab{
+  background:rgba(255,255,255,.12); color:#eaf2fa; border:1.5px solid rgba(255,255,255,.30);
+  padding:13px 32px; border-radius:999px; cursor:pointer; font-size:19px; font-weight:800;
+  transition:.18s; display:flex; align-items:center; gap:10px; letter-spacing:.3px;
+}
+.tab:hover{background:rgba(255,255,255,.24); transform:translateY(-1px)}
+.tab.active{background:#fff; color:var(--primary); border-color:#fff; box-shadow:0 4px 16px rgba(0,0,0,.28); transform:translateY(-1px)}
+.tab .ic{font-size:23px}
+
+/* ===== layout ===== */
+.shell{display:flex; align-items:flex-start; min-height:calc(100vh - 60px)}
+aside{
+  width:268px; flex:none; position:sticky; top:60px; align-self:flex-start;
+  height:calc(100vh - 60px); overflow-y:auto; background:#fff;
+  border-right:1px solid var(--line); padding:20px 18px 40px;
+}
+aside h2{font-size:12px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted); margin:18px 0 9px; font-weight:800}
+aside h2:first-child{margin-top:0}
+.fbtn{
+  display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%;
+  background:#f7f9fd; border:1px solid var(--line); color:var(--ink-soft);
+  padding:7px 11px; border-radius:9px; cursor:pointer; font-size:13px; margin-bottom:6px;
+  transition:.15s; text-align:left; font-family:inherit;
+}
+.fbtn:hover{border-color:var(--primary-2); color:var(--primary)}
+.fbtn.on{background:var(--primary); border-color:var(--primary); color:#fff; font-weight:700}
+.fbtn .ct{font-size:11px; opacity:.7; background:rgba(0,0,0,.08); padding:1px 7px; border-radius:999px}
+.fbtn.on .ct{background:rgba(255,255,255,.22); opacity:.95}
+.clearbtn{width:100%; margin-top:14px; background:var(--accent-soft); color:var(--accent);
+  border:1px dashed var(--accent); padding:8px; border-radius:9px; cursor:pointer; font-size:12.5px; font-weight:700; font-family:inherit}
+.clearbtn:hover{background:var(--accent); color:#fff}
+.filtnote{font-size:11px; color:var(--muted); margin-top:6px; line-height:1.5}
+
+main{flex:1; padding:24px 30px 70px; min-width:0}
+.page{display:none}
+.page.active{display:block}
+
+/* ===== section block ===== */
+.block{margin-bottom:34px}
+.block-head{display:flex; align-items:center; gap:13px; margin-bottom:4px}
+.block-head .dot{width:13px; height:13px; border-radius:50%}
+.block-head h3{font-size:20px; font-weight:800; letter-spacing:.3px}
+.block-head .en{font-size:12px; color:var(--muted); font-weight:600; letter-spacing:.4px}
+.block-head .cnt{font-size:12px; color:#fff; padding:2px 11px; border-radius:999px; font-weight:700}
+.block-rule{height:3px; border-radius:3px; margin:9px 0 18px; opacity:.85}
+.sec-clin .dot{background:var(--clin)} .sec-clin .cnt{background:var(--clin)} .sec-clin .block-rule{background:linear-gradient(90deg,var(--clin),transparent)}
+.sec-rw .dot{background:var(--rw)} .sec-rw .cnt{background:var(--rw)} .sec-rw .block-rule{background:linear-gradient(90deg,var(--rw),transparent)}
+.sec-gl .dot{background:var(--gl)} .sec-gl .cnt{background:var(--gl)} .sec-gl .block-rule{background:linear-gradient(90deg,var(--gl),transparent)}
+
+/* drug-class group label */
+.grp-label{grid-column:1/-1; display:flex; align-items:center; gap:10px; margin:6px 0 -4px; padding-top:6px}
+.grp-label .bar{width:4px; height:17px; border-radius:3px; background:var(--primary-2)}
+.grp-label span{font-size:13.5px; font-weight:800; color:var(--primary)}
+.grp-label .pin{font-size:10.5px; background:var(--gold-soft); color:var(--gold); padding:2px 8px; border-radius:999px; font-weight:800; border:1px solid #e7d4a3}
+.grp-label .gc{flex:1; height:1px; background:var(--line)}
+
+/* ===== flashcard grid ===== */
+.grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+@media(max-width:1500px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+.grid-gl{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1500px){.grid-gl{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1100px){.grid-gl{grid-template-columns:1fr}}
+
+.card{perspective:1600px; height:340px; cursor:pointer}
+.card.tall{height:400px}
+.card-inner{position:relative; width:100%; height:100%; transition:transform .6s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d}
+.card.flipped .card-inner{transform:rotateY(180deg)}
+.face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:14px; background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow);
+  padding:16px 16px 14px; display:flex; flex-direction:column; overflow:hidden}
+.card:hover .face{box-shadow:var(--shadow-lg)}
+.face.back{transform:rotateY(180deg); background:linear-gradient(170deg,#fbfcfe,#f2f6fc)}
+
+/* front */
+.cband{position:absolute; top:0; left:0; right:0; height:5px}
+.card .idtag{position:absolute; top:11px; right:13px; font-size:10.5px; font-weight:800; letter-spacing:.5px; color:var(--muted); font-family:Georgia,serif}
+.card .startag{position:absolute; top:32px; right:13px; font-size:9.5px; font-weight:800; color:#fff; background:var(--star); padding:2px 7px; border-radius:999px; letter-spacing:.4px}
+.cls-pill{align-self:flex-start; font-size:10.5px; font-weight:700; padding:3px 10px; border-radius:999px; margin:10px 0 0; max-width:78%}
+.drugname{font-size:34px; font-weight:900; line-height:1.08; margin:12px 0 3px; color:var(--primary); letter-spacing:-.6px; text-shadow:0 1px 0 rgba(31,78,121,.06); word-break:break-word}
+.drugname.dn-md{font-size:22px; letter-spacing:-.3px}
+.drugname.dn-sm{font-size:16px; line-height:1.2; letter-spacing:-.2px}
+.card.tall .drugname{font-size:30px}
+.card.tall .drugname.dn-md{font-size:21px}
+.card.tall .drugname.dn-sm{font-size:16px}
+.trialname{font-size:15px; font-weight:700; color:var(--primary-2); margin-bottom:7px}
+/* evidence + head-to-head badges */
+.ev-row{display:flex; gap:6px; margin-bottom:7px}
+.ev-badge{font-size:10.5px; font-weight:800; padding:2px 9px; border-radius:6px; letter-spacing:.3px}
+.ev-clin{background:var(--clin); color:#fff}
+.ev-rw{background:var(--rw); color:#fff}
+.ev-htoh{background:#a8341f; color:#fff}
+.ev-nh{background:#eef1f6; color:#8590a8; border:1px solid #e0e6ef}
+/* design tags */
+.dtags{display:flex; flex-wrap:wrap; gap:4px; margin-bottom:9px}
+.dtag{font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; background:#eef3f9; color:var(--ink-soft); border:1px solid #e3e9f3}
+/* info grid */
+.finfo-grid{display:grid; grid-template-columns:1fr 1fr; gap:4px 12px; margin-top:auto; margin-bottom:26px}
+.finfo{display:flex; flex-direction:column; gap:0; line-height:1.25}
+.finfo .fil{font-size:9.5px; color:var(--muted); font-weight:700; letter-spacing:.3px}
+.finfo .fiv{font-size:11.5px; color:var(--ink); font-weight:600}
+.finfo:first-child{grid-column:1/-1}
+.finfo:first-child .fiv{color:var(--primary); font-weight:700}
+.cref{position:absolute; left:16px; right:16px; bottom:9px; font-size:8.5px; line-height:1.3; color:#aeb6c6; font-weight:500; border-top:1px solid #eef1f6; padding-top:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.flip-hint{position:absolute; top:13px; right:74px; font-size:9.5px; color:var(--muted); display:flex; align-items:center; gap:4px}
+
+/* back */
+.face.back{padding:14px 15px}
+.back .bid{font-size:10px; font-weight:800; color:var(--primary-2); letter-spacing:.6px; font-family:Georgia,serif}
+.back .ten{font-size:11.5px; font-weight:700; color:var(--ink); line-height:1.4; margin:4px 0 3px}
+.back .tzh{font-size:12px; font-weight:700; color:var(--primary); line-height:1.45; margin-bottom:8px; padding-bottom:8px; border-bottom:1px dashed var(--line)}
+.back .scroll{overflow-y:auto; flex:1; padding-right:4px}
+.back .lbl{display:inline-block; font-size:9.5px; font-weight:800; letter-spacing:.5px; padding:1px 7px; border-radius:5px; margin-bottom:3px}
+.lbl.bg{background:#eef2f8; color:var(--primary)}
+.lbl.re{background:#fdeee9; color:var(--accent)}
+.lbl.co{background:#e4f2ea; color:var(--rw)}
+.back p{font-size:11.5px; line-height:1.55; color:var(--ink-soft); margin-bottom:9px}
+.back p.res{color:var(--ink); font-weight:500}
+.back .num{color:var(--accent); font-weight:800}
+.back .scroll::-webkit-scrollbar{width:5px} .back .scroll::-webkit-scrollbar-thumb{background:#cfd8e6; border-radius:3px}
+aside::-webkit-scrollbar{width:6px} aside::-webkit-scrollbar-thumb{background:#d4dbe8; border-radius:3px}
+
+/* guideline card (list style) */
+.gcard{background:#fff; border:1px solid var(--line); border-left:5px solid var(--gl); border-radius:12px; padding:18px 20px; box-shadow:var(--shadow); display:flex; flex-direction:column}
+.gcard .ghead{display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:9px}
+.gcard .gtag{font-size:12px; font-weight:800; color:var(--gl); background:var(--gl-bg); padding:4px 11px; border-radius:999px; white-space:nowrap}
+.gcard .gid{font-size:12px; font-weight:800; color:var(--muted); font-family:Georgia,serif}
+.gcard h4{font-size:17px; font-weight:800; color:var(--primary); line-height:1.4; margin-bottom:5px}
+.gcard .gen{font-size:12.5px; color:var(--muted); line-height:1.45; margin-bottom:12px; font-weight:500}
+.gcard ul{list-style:none; display:flex; flex-direction:column; gap:8px}
+.gcard li{font-size:14px; line-height:1.55; color:var(--ink-soft); padding-left:20px; position:relative}
+.gcard li:before{content:"▸"; position:absolute; left:2px; top:0; color:var(--gl); font-size:13px}
+.gcard li .num{color:var(--accent); font-weight:800}
+.gcard .gdrug{align-self:flex-start; margin-top:12px; font-size:12.5px; font-weight:700; color:var(--gl); background:var(--gl-bg); padding:4px 13px; border-radius:8px}
+
+.empty{grid-column:1/-1; text-align:center; color:var(--muted); padding:40px; font-size:14px}
+
+/* ===== comparison tables ===== */
+.cmp-intro{background:#fff; border:1px solid var(--line); border-left:5px solid var(--primary-2); border-radius:12px; padding:16px 20px; margin-bottom:22px; box-shadow:var(--shadow)}
+.cmp-intro h2{font-size:19px; color:var(--primary); margin-bottom:6px; font-weight:800}
+.cmp-intro p{font-size:13px; color:var(--ink-soft); line-height:1.6}
+.cmp-legend{display:flex; flex-wrap:wrap; gap:9px; margin-top:11px}
+.cmp-legend span{display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--ink-soft)}
+.cmp-legend b{font-size:10.5px; font-weight:800; padding:2px 9px; border-radius:6px}
+.tb-clin{background:var(--clin); color:#fff} .tb-rw{background:var(--rw); color:#fff}
+.tb-htoh{background:#a8341f; color:#fff} .tb-nh{background:#eef1f6; color:#8590a8; border:1px solid #e0e6ef}
+
+.cmp-block{margin-bottom:34px}
+.cmp-head{display:flex; align-items:center; gap:12px; margin-bottom:5px}
+.cmp-head .bar{width:6px; height:24px; border-radius:4px; background:var(--primary-2)}
+.cmp-head h3{font-size:20px; font-weight:800; color:var(--primary)}
+.cmp-head .badge-saf{background:var(--accent); color:#fff; font-size:12px; font-weight:800; padding:3px 12px; border-radius:999px}
+.cmp-note{font-size:12px; color:var(--ink-soft); background:#fbf6ee; border:1px solid #efe3cf; border-radius:8px; padding:8px 13px; margin:8px 0 14px; line-height:1.55}
+.cmp-note b{color:var(--accent)}
+
+.tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); background:#fff}
+table.cmp{border-collapse:collapse; width:100%; min-width:680px; font-size:13px}
+table.cmp th, table.cmp td{padding:10px 13px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+table.cmp thead th{background:linear-gradient(180deg,#1f4e79,#27557f); color:#fff; font-size:12.5px; font-weight:800; letter-spacing:.3px}
+table.cmp tbody tr:hover{background:#f6f9fd}
+.metric-row td{background:#eaf0f8; font-weight:800; color:var(--primary); font-size:13.5px; border-top:2px solid #cdd9e8}
+.t-study{font-weight:800; color:var(--ink)}
+.t-drug{color:var(--primary-2); font-weight:700}
+.t-id{font-family:Georgia,serif; font-size:11px; color:var(--muted); font-weight:700}
+.t-val{font-weight:700; color:var(--ink)}
+.t-val .hi{color:var(--accent); font-weight:800}
+.t-sig{font-size:11px; font-weight:800; padding:2px 8px; border-radius:6px; display:inline-block}
+.sig-p{background:#fdeee9; color:var(--accent)} .sig-rwe{background:var(--rw-bg); color:var(--rw)}
+.sig-arm{background:#eef1f6; color:#8590a8} .sig-gl{background:var(--gl-bg); color:var(--gl)} .sig-na{color:var(--muted)}
+.minib{font-size:10px; font-weight:800; padding:1.5px 7px; border-radius:5px; margin-right:4px}
+.mb-clin{background:var(--clin-bg); color:var(--clin)} .mb-rw{background:var(--rw-bg); color:var(--rw)}
+.mb-htoh{background:#f6e2dd; color:#a8341f} .mb-nh{background:#eef1f6; color:#8590a8}
+
+footer{padding:18px 30px; font-size:11px; color:var(--muted); border-top:1px solid var(--line); background:#fff; line-height:1.6}
+.legend{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:6px}
+.legend span{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft); font-weight:600}
+.legend i{width:11px; height:11px; border-radius:3px; display:inline-block}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">EULAR <b>2026</b> · SLE 研究彙整</div>
+  <div class="sub serif">Systemic Lupus Erythematosus — Drug &amp; Guideline Evidence</div>
+  <div class="spacer"></div>
+  <div class="tabs">
+    <button class="tab active" data-pop="adult"><span class="ic">🧑</span> 成人 Adult</button>
+    <button class="tab" data-pop="pediatric"><span class="ic">🧒</span> 兒童 Paediatric</button>
+    <button class="tab" data-pop="compare"><span class="ic">📊</span> 臨床數據比較</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside>
+    <h2>篩選 · 區塊</h2>
+    <div id="f-section"></div>
+    <h2>篩選 · 藥物類別</h2>
+    <div id="f-class"></div>
+    <h2>篩選 · 疾病／適應症</h2>
+    <div id="f-indication"></div>
+    <button class="clearbtn" id="clearAll">✕ 清除所有篩選</button>
+    <div class="filtnote">點選任一條件即可篩選；可複選。卡片點擊翻面看詳情與數據。</div>
+  </aside>
+
+  <main>
+    <div class="page active" id="page-adult"></div>
+    <div class="page" id="page-pediatric"></div>
+    <div class="page" id="page-compare"></div>
+  </main>
+</div>
+
+<footer>
+  <div class="legend">
+    <span><i style="background:var(--clin)"></i>臨床研究 Clinical</span>
+    <span><i style="background:var(--rw)"></i>真實世界研究 Real-World</span>
+    <span><i style="background:var(--gl)"></i>指引／達標／結果測量／分類 Guideline &amp; Outcomes</span>
+    <span><i style="background:var(--star)"></i>Belimumab（本次重點）</span>
+  </div>
+  資料來源：EULAR 2026 Abstract Book（Annals of the Rheumatic Diseases）。內容為非促銷性學術整理，數據依摘要原文；臨床決策請依藥品仿單、最新 EULAR/ACR 指引及醫師判斷。
+</footer>
+
+<script>
+// 統一卡片正面 + 比較表用的標準化中介資料
+// evidence: "clinical" | "realworld"
+// evidence: "clinical" | "realworld"（本屆 SLE 研究皆非頭對頭設計）
+// design: 陣列，標準化實驗設計標籤
+// subtype: SLE 適應症細項
+// n / country / enroll(收納時間區間) / week(統計週數/時間點)
+const META = {
+  // ===== JAK/TYK2 =====
+  "POS0695":{evidence:"clinical",htoh:false,design:["多中心","隨機","雙盲","安慰劑對照","事後分析"],subtype:"中重度 SLE",n:"363（PAISLEY）",country:"國際",enroll:"—",week:"≥48 週 + LTE"},
+  // ===== Belimumab =====
+  "POS0077":{evidence:"realworld",htoh:false,design:["全球","前瞻性","觀察登錄"],subtype:"SLE（廣泛）",n:"≈800",country:"全球多國",enroll:"持續收案",week:"5 年"},
+  "POS1052":{evidence:"realworld",htoh:false,design:["多中心","回溯世代"],subtype:"持續緩解 SLE",n:"≈100",country:"義大利",enroll:"—",week:"減量期追蹤"},
+  "POS1365":{evidence:"realworld",htoh:false,design:["全國","多中心","觀察世代"],subtype:"SLE（廣泛）",n:"≈600",country:"義大利",enroll:"2011–2024",week:"中位 ≈36 個月"},
+  "AB1068":{evidence:"realworld",htoh:false,design:["單中心","世代"],subtype:"SLE（廣泛）",n:"82",country:"義大利",enroll:"—",week:"≥12 個月"},
+  "AB1104":{evidence:"realworld",htoh:false,design:["縱貫","觀察"],subtype:"SLE（廣泛）",n:"63",country:"瑞典/義大利",enroll:"—",week:"6 個月"},
+  "AB1144":{evidence:"realworld",htoh:false,design:["全國","真實世界世代"],subtype:"狼瘡漿膜炎",n:"100（180 次發作）",country:"法國",enroll:"—",week:"無復發存活"},
+  // ===== FcRn =====
+  "LB0007":{evidence:"clinical",htoh:false,design:["第 2 期","隨機","雙盲","安慰劑對照"],subtype:"中重度 SLE",n:"228",country:"國際",enroll:"—",week:"24 / 52 週"},
+  // ===== mTOR =====
+  "LB0006":{evidence:"clinical",htoh:false,design:["多中心","隨機","雙盲","安慰劑對照"],subtype:"活動性 SLE",n:"146",country:"中國（6 中心）",enroll:"—",week:"24 週"},
+  // ===== TLR7/8 =====
+  "OP0337":{evidence:"clinical",htoh:false,design:["第 2 期","長期延伸（LTE）"],subtype:"皮膚型狼瘡",n:"WILLOW 族群",country:"國際",enroll:"—",week:"48 週"},
+  // ===== anti-BDCA2 =====
+  "POS0438":{evidence:"clinical",htoh:false,design:["隨機","雙盲","安慰劑對照"],subtype:"皮膚型狼瘡（CLE）",n:"AMETHYST Part A",country:"國際",enroll:"—",week:"16 / 24 週"},
+  "AB1215":{evidence:"clinical",htoh:false,design:["族群 PK/PD","暴露–反應分析"],subtype:"SLE（廣泛）",n:"SLE 族群",country:"國際",enroll:"—",week:"模型分析"},
+  // ===== BTK =====
+  "POS0712":{evidence:"clinical",htoh:false,design:["第 IIb 期","隨機","安慰劑對照"],subtype:"活動性 SLE",n:"187",country:"中國",enroll:"—",week:"48 週"},
+  // ===== anti-CD38 =====
+  "OP0340":{evidence:"clinical",htoh:false,design:["單中心","開放標籤","第 2 期 LTE"],subtype:"難治型 SLE",n:"10",country:"德國",enroll:"—",week:"12 週 + 延伸"},
+  // ===== CD19 細胞療法 =====
+  "OP0341":{evidence:"clinical",htoh:false,design:["單臂","開放標籤","劑量探索 第 I 期"],subtype:"重症難治型 SLE",n:"11 輸注",country:"國際",enroll:"—",week:"中位起效 5.1 個月"},
+  "POS0374":{evidence:"clinical",htoh:false,design:["首次人體（FIH）","單次輸注"],subtype:"難治型 SLE",n:"難治 SLE/SSc",country:"中國",enroll:"—",week:"≥10 個月"},
+  "POS1179":{evidence:"clinical",htoh:false,design:["第 1 期","皮下投予"],subtype:"RA / SLE",n:"早期收案",country:"國際",enroll:"—",week:"早期"},
+  "LB0004":{evidence:"clinical",htoh:false,design:["開放標籤","3+3 劑量爬升"],subtype:"難治型自體免疫（含 SLE）",n:"12（靜脈組）",country:"中國",enroll:"—",week:"36 / 52 週"},
+  // ===== SGLT2 =====
+  "AB1131":{evidence:"clinical",htoh:false,design:["臨床研究"],subtype:"膜性狼瘡腎炎",n:"MLN 族群",country:"墨西哥",enroll:"—",week:"—"},
+  // ===== anti-CD20 Obinutuzumab =====
+  "POS0310":{evidence:"clinical",htoh:false,design:["第 III 期","隨機","雙盲","安慰劑對照","藥效學"],subtype:"活動性 SLE",n:"ALLEGORY",country:"國際",enroll:"—",week:"52 週"},
+  "POS0683":{evidence:"clinical",htoh:false,design:["第 III 期","隨機","雙盲","安慰劑對照"],subtype:"活動性 SLE",n:"ALLEGORY",country:"國際",enroll:"—",week:"52 週"},
+  "POS0723":{evidence:"clinical",htoh:false,design:["第 III 期","隨機","雙盲","安慰劑對照","安全性"],subtype:"活動性 SLE",n:"ALLEGORY",country:"國際",enroll:"—",week:"52 週"},
+  // ===== anti-CD20 Rituximab =====
+  "AB1136":{evidence:"realworld",htoh:false,design:["真實世界","世代"],subtype:"難治型 SLE",n:"SLE 世代",country:"英國",enroll:"—",week:"升級事件分析"},
+  "OP0123":{evidence:"clinical",htoh:false,design:["雙盲","隨機","安慰劑對照"],subtype:"※非 SLE：PMR",n:"多中心",country:"荷蘭",enroll:"—",week:"類固醇節省"},
+  "OP0232":{evidence:"clinical",htoh:false,design:["隨機","序貫療法"],subtype:"※非 SLE：PR3-AAV",n:"PR3-AAV",country:"英國",enroll:"—",week:"ANCA 陰性"},
+  // ===== Voclosporin =====
+  "POS0686":{evidence:"clinical",htoh:false,design:["第 3 期","事後分析"],subtype:"狼瘡腎炎",n:"AURORA 1",country:"國際",enroll:"—",week:"複合腎臟結局"},
+  "POS0691":{evidence:"realworld",htoh:false,design:["真實世界","登錄"],subtype:"狼瘡腎炎",n:"英國 LN",country:"英國",enroll:"—",week:"真實世界追蹤"},
+  // ===== anti-IFNAR Anifrolumab =====
+  "OP0219":{evidence:"realworld",htoh:false,design:["前瞻性","觀察（中期）"],subtype:"SLE（DORIS/LLDAS）",n:"ASTER",country:"歐洲多國",enroll:"持續收案",week:"12 個月"},
+  "OP0342":{evidence:"realworld",htoh:false,design:["前瞻性","觀察（中期）"],subtype:"SLE（多器官）",n:"ASTER",country:"歐洲多國",enroll:"持續收案",week:"12 個月"},
+  "AB1203":{evidence:"realworld",htoh:false,design:["真實世界","多中心"],subtype:"重度血液學 SLE",n:"重度血液學 SLE",country:"西班牙",enroll:"—",week:"2 年"},
+  "AB1133":{evidence:"clinical",htoh:false,design:["第 3 期","隨機","安慰劑對照"],subtype:"中重度 SLE（PRO）",n:"TULIP-SC",country:"國際",enroll:"—",week:"52 週"},
+  "POS0721":{evidence:"realworld",htoh:false,design:["真實世界","多中心"],subtype:"SLE（廣泛）",n:"96",country:"保加利亞",enroll:"—",week:"12 個月"},
+  "POS0725":{evidence:"realworld",htoh:false,design:["觀察登錄","真實世界"],subtype:"SLE（DORIS 緩解）",n:"學術登錄",country:"美國",enroll:"—",week:"真實世界追蹤"},
+  "POS1069":{evidence:"realworld",htoh:false,design:["觀察","多中心"],subtype:"中重度 SLE（序貫）",n:"241",country:"西班牙",enroll:"—",week:"追蹤期"},
+  "POS0714":{evidence:"realworld",htoh:false,design:["配對比較","真實世界對照"],subtype:"SLE（器官損傷）",n:"TULIP vs SOC",country:"國際/加拿大",enroll:"—",week:"4 年"},
+  "POS0717":{evidence:"realworld",htoh:false,design:["回溯性","研究"],subtype:"SLE（啟動時機）",n:"84",country:"西班牙",enroll:"2010–2025",week:"藥物存活"},
+  "POS0413":{evidence:"realworld",htoh:false,design:["觀察性","研究"],subtype:"第一型干擾素病變",n:"干擾素病變",country:"法國",enroll:"—",week:"真實世界追蹤"},
+  // ===== Telitacicept =====
+  "AB1209":{evidence:"realworld",htoh:false,design:["前瞻性","觀察"],subtype:"SLE（含腎臟）",n:"60",country:"中國",enroll:"—",week:"24 週"},
+  // ===== 疾病結果 / 共病（realworld 非藥物主導） =====
+  "OP0338":{evidence:"realworld",htoh:false,design:["縱貫","觀察世代"],subtype:"SLE（腎功能）",n:"3,215",country:"亞太多國",enroll:"—",week:"縱貫追蹤"},
+  "POS0308":{evidence:"realworld",htoh:false,design:["橫斷面","比較研究"],subtype:"SLE（動脈僵硬度）",n:"726",country:"希臘",enroll:"—",week:"橫斷面"},
+  "POS1061":{evidence:"realworld",htoh:false,design:["觀察性","世代"],subtype:"低蛋白尿 LN",n:"LN 世代",country:"日本",enroll:"—",week:"長期追蹤"},
+  "AB1153":{evidence:"realworld",htoh:false,design:["全國","族群研究"],subtype:"SLE（PCP 感染）",n:"全國資料",country:"韓國",enroll:"—",week:"族群追蹤"},
+  "POS0684":{evidence:"realworld",htoh:false,design:["系統性回顧","統合迴歸"],subtype:"SLE（生存趨勢）",n:"296 研究",country:"國際",enroll:"1950–2024",week:"5–20 年生存"},
+  "POS0692":{evidence:"realworld",htoh:false,design:["觀察性","研究"],subtype:"SLE（依從性）",n:"分型世代",country:"美國",enroll:"—",week:"—"},
+  "AB1070":{evidence:"realworld",htoh:false,design:["回溯性","世代"],subtype:"SLE（類固醇遞減）",n:"SLE 世代",country:"葡萄牙",enroll:"—",week:"遞減後追蹤"},
+  "POS0696":{evidence:"realworld",htoh:false,design:["全國","住院資料庫"],subtype:"SLE（血漿置換）",n:">120 萬住院",country:"美國",enroll:"—",week:"院內結果"},
+  // ===== 兒童 =====
+  "AB0522":{evidence:"realworld",htoh:false,design:["真實世界","登錄"],subtype:"兒童 SLE（jSLE）",n:"jSLE 世代",country:"德國",enroll:"—",week:"真實世界追蹤"},
+  "AB1097":{evidence:"realworld",htoh:false,design:["真實世界","藥動學"],subtype:"SLE（含青少年）",n:"95",country:"瑞典等",enroll:"—",week:"24 個月"},
+  "POS1375":{evidence:"realworld",htoh:false,design:["縱貫","比較評估"],subtype:"兒童 SLE（成年結果）",n:"JSLE vs JDM",country:"英國",enroll:"—",week:"至成年期"},
+};
+
+// 比較表資料：依適應症分組，列出可比較的同類臨床指標
+// type: "efficacy"(療效) | "safety"(安全性)
+// 每筆 metric 為一個指標，rows 為各研究在該指標的數據
+const COMPARE = {
+  "中重度 SLE（系統性）— 療效": {
+    note:"以下為各自獨立的安慰劑對照試驗或真實世界研究；跨試驗數字不可直接對比，僅供概覽。",
+    type:"efficacy",
+    metrics:[
+      {name:"SRI-4 反應（藥物 vs 安慰劑/對照）", unit:"%",
+       rows:[
+        {study:"JASMINE-SLE",id:"LB0007",drug:"Nipocalimab",ev:"clinical",htoh:false,week:"24 週",val:"53.5 vs 46.7",sig:"α=0.1 達顯著"},
+        {study:"JASMINE-SLE",id:"LB0007",drug:"Nipocalimab",ev:"clinical",htoh:false,week:"52 週",val:"53.6 vs 39.7",sig:""},
+        {study:"SIRIUS",id:"LB0006",drug:"Sirolimus",ev:"clinical",htoh:false,week:"24 週",val:"52.9 vs 22.7",sig:"P<0.001"},
+        {study:"Phase IIb",id:"POS0712",drug:"Orelabrutinib 75mg",ev:"clinical",htoh:false,week:"48 週",val:"57.1 vs 34.4",sig:"p=0.01"},
+        {study:"DARALUP",id:"OP0340",drug:"Daratumumab",ev:"clinical",htoh:false,week:"12 週",val:"100（單臂）",sig:"單臂"},
+        {study:"CC312 P1",id:"LB0004",drug:"CC312",ev:"clinical",htoh:false,week:"36 週",val:"83.3（單臂）",sig:"單臂"},
+       ]},
+      {name:"BICLA 反應", unit:"%",
+       rows:[
+        {study:"SIRIUS",id:"LB0006",drug:"Sirolimus",ev:"clinical",htoh:false,week:"24 週",val:"60.0 vs 32.2",sig:"顯著"},
+        {study:"Phase IIb",id:"POS0712",drug:"Orelabrutinib 75mg",ev:"clinical",htoh:false,week:"48 週",val:"優於安慰劑",sig:"顯著"},
+       ]},
+      {name:"LLDAS 達成", unit:"%",
+       rows:[
+        {study:"JASMINE-SLE",id:"LB0007",drug:"Nipocalimab",ev:"clinical",htoh:false,week:"52 週",val:"37.5 vs 20.5",sig:""},
+        {study:"AZAHAR",id:"POS1070",drug:"Anifrolumab",ev:"realworld",htoh:false,week:"12 個月",val:"真實世界改善",sig:"RWE"},
+        {study:"Telitacicept",id:"AB1209",drug:"Telitacicept",ev:"realworld",htoh:false,week:"24 週",val:"5.0 → 60.98",sig:"RWE"},
+        {study:"Belimumab 血中濃度",id:"AB1097",drug:"Belimumab",ev:"realworld",htoh:false,week:"24 個月",val:"44",sig:"RWE"},
+       ]},
+      {name:"DORIS 緩解", unit:"%",
+       rows:[
+        {study:"Belimumab 血中濃度",id:"AB1097",drug:"Belimumab",ev:"realworld",htoh:false,week:"24 個月",val:"33",sig:"RWE"},
+        {study:"學術登錄",id:"POS0725",drug:"Anifrolumab",ev:"realworld",htoh:false,week:"追蹤",val:"與緩解相關",sig:"RWE"},
+        {study:"CC312 P1",id:"LB0004",drug:"CC312",ev:"clinical",htoh:false,week:"36 週",val:"重症達緩解",sig:"單臂"},
+        {study:"CARLYSLE",id:"OP0341",drug:"Obe-cel CAR-T",ev:"clinical",htoh:false,week:"50M 組",val:"83.3（5/6）",sig:"單臂"},
+       ]},
+      {name:"anti-dsDNA 下降", unit:"",
+       rows:[
+        {study:"DARALUP",id:"OP0340",drug:"Daratumumab",ev:"clinical",htoh:false,week:"12 週",val:"中位 ↓61.5%",sig:"p=0.002"},
+        {study:"ALLEGORY",id:"POS0310",drug:"Obinutuzumab",ev:"clinical",htoh:false,week:"52 週",val:"中位 ↓110.5 vs ↓14.0 IU/mL",sig:"顯著"},
+       ]},
+      {name:"類固醇節省（降至 ≤7.5mg/日）", unit:"%",
+       rows:[
+        {study:"Phase IIb",id:"POS0712",drug:"Orelabrutinib 75mg",ev:"clinical",htoh:false,week:"48 週",val:"71.1 vs 43.6",sig:"顯著"},
+       ]},
+      {name:"疾病活動度下降（真實世界）", unit:"",
+       rows:[
+        {study:"多中心 RWE",id:"POS0721",drug:"Anifrolumab",ev:"realworld",htoh:false,week:"12 個月",val:"顯著下降",sig:"p<0.001"},
+        {study:"序貫 RWE",id:"POS1069",drug:"Anifrolumab",ev:"realworld",htoh:false,week:"追蹤",val:"曾用/未用 belimumab 皆改善",sig:"RWE"},
+       ]},
+    ]
+  },
+  "皮膚型狼瘡（CLE）— 療效": {
+    note:"兩研究分別為安慰劑對照（litifilimab）與長期延伸（enpatoran）；數字不可直接對比。",
+    type:"efficacy",
+    metrics:[
+      {name:"CLASI-A 反應 / 達成", unit:"",
+       rows:[
+        {study:"AMETHYST A",id:"POS0438",drug:"Litifilimab",ev:"clinical",htoh:false,week:"24 週",val:"CLASI-50：40.8 vs 21.0%",sig:"p<0.05"},
+        {study:"AMETHYST A",id:"POS0438",drug:"Litifilimab",ev:"clinical",htoh:false,week:"16/24 週",val:"CLASI-A LSM ↓14.1 / ↓18.7",sig:"p<0.05"},
+        {study:"WILLOW LTE",id:"OP0337",drug:"Enpatoran",ev:"clinical",htoh:false,week:"48 週",val:"CLASI-A 0–3：57.7–63.4%",sig:"LTE"},
+       ]},
+      {name:"CLA-IGA-R 清除/接近清除", unit:"%",
+       rows:[
+        {study:"AMETHYST A",id:"POS0438",drug:"Litifilimab",ev:"clinical",htoh:false,week:"16 週",val:"14.7 vs 2.9",sig:"p<0.05"},
+        {study:"AMETHYST A",id:"POS0438",drug:"Litifilimab",ev:"clinical",htoh:false,week:"24 週",val:"19.0 vs 4.2",sig:"p<0.05"},
+       ]},
+    ]
+  },
+  "狼瘡腎炎（LN）— 療效與腎臟結果": {
+    note:"voclosporin 為第 3 期事後分析，其餘為真實世界／觀察研究；數字不可直接對比。",
+    type:"efficacy",
+    metrics:[
+      {name:"腎臟相關事件或死亡風險", unit:"",
+       rows:[
+        {study:"AURORA 1",id:"POS0686",drug:"Voclosporin",ev:"clinical",htoh:false,week:"事後分析",val:"風險 ↓53%",sig:"顯著"},
+       ]},
+      {name:"治療策略 / 真實世界使用", unit:"",
+       rows:[
+        {study:"BILAG-BR",id:"POS0691",drug:"Voclosporin",ev:"realworld",htoh:false,week:"RWE",val:"英國真實世界療效與安全性",sig:"RWE"},
+        {study:"AGREE II",id:"AB1139",drug:"指引評析",ev:"realworld",htoh:false,week:"—",val:"LN 指引品質比較",sig:"指引"},
+        {study:"早期四聯療法",id:"POS0703",drug:"指引一致性",ev:"realworld",htoh:false,week:"—",val:"88% 風濕科同意指引",sig:"指引"},
+       ]},
+      {name:"腎功能 / 蛋白尿", unit:"",
+       rows:[
+        {study:"SGLT2 研究",id:"AB1131",drug:"Dapagliflozin",ev:"clinical",htoh:false,week:"—",val:"降蛋白尿、護腎",sig:""},
+        {study:"亞太世代",id:"OP0338",drug:"（多治療）",ev:"realworld",htoh:false,week:"縱貫",val:"LLDAS50 與 eGFR 下降減緩相關",sig:"RWE"},
+        {study:"低蛋白尿 LN",id:"POS1061",drug:"（誘導治療）",ev:"realworld",htoh:false,week:"長期",val:"完全腎臟反應分析",sig:"RWE"},
+       ]},
+    ]
+  },
+  "兒童／青少年 SLE（jSLE）— 療效": {
+    note:"皆為真實世界登錄／藥動學研究；數字不可直接對比。",
+    type:"efficacy",
+    metrics:[
+      {name:"治療反應 / 達標", unit:"",
+       rows:[
+        {study:"BIKER",id:"AB0522",drug:"Belimumab",ev:"realworld",htoh:false,week:"RWE",val:"疾病活動度改善、類固醇節省",sig:"RWE"},
+        {study:"血中濃度",id:"AB1097",drug:"Belimumab",ev:"realworld",htoh:false,week:"24 個月",val:"DORIS 33%／LLDAS 44%",sig:"RWE"},
+        {study:"CARLYSLE（含青少年）",id:"OP0341",drug:"Obe-cel CAR-T",ev:"clinical",htoh:false,week:"50M 組",val:"DORIS 緩解 5/6",sig:"單臂"},
+       ]},
+      {name:"長期損傷 / 心血管風險", unit:"",
+       rows:[
+        {study:"JSLE vs JDM",id:"POS1375",drug:"（結果評估）",ev:"realworld",htoh:false,week:"至成年期",val:"JSLE 心血管風險與損傷較高",sig:"RWE"},
+       ]},
+    ]
+  },
+};
+
+// 安全性比較表（獨立）
+const SAFETY = {
+  note:"安全性事件跨試驗定義與族群不同，不可直接對比，僅供概覽。CRS=細胞激素釋放症候群；ICANS=免疫效應細胞相關神經毒性。",
+  metrics:[
+    {name:"CRS / ICANS（細胞療法）", rows:[
+      {study:"CARLYSLE",id:"OP0341",drug:"Obe-cel CAR-T",ev:"clinical",val:"無 ICANS、無 ≥2 級 CRS；1 例肝損傷列 DLT"},
+      {study:"CC312 P1",id:"LB0004",drug:"CC312",ev:"clinical",val:"最高劑量無 DLT、ICANS 或 ≥2 級 CRS"},
+      {study:"E-CAR-T FIH",id:"POS0374",drug:"E-CAR-T",ev:"clinical",val:"無 >2 級 CRS、無 ICANS"},
+    ]},
+    {name:"嗜中性球低下 / IgG（anti-CD20）", rows:[
+      {study:"ALLEGORY",id:"POS0723",drug:"Obinutuzumab",ev:"clinical",val:"藥物相關嗜中性球低下平均第 157 天發生、持續 ≈35 天；IgG 52 週 ↓4.11 g/L"},
+    ]},
+    {name:"低球蛋白血症 / 感染", rows:[
+      {study:"DARALUP",id:"OP0340",drug:"Daratumumab",ev:"clinical",val:"低球蛋白血症、感染、腸胃道症狀；無嚴重不良事件"},
+      {study:"JASMINE-SLE",id:"LB0007",drug:"Nipocalimab",ev:"clinical",val:"嚴重感染率各組相近"},
+    ]},
+    {name:"常見不良事件（小分子 / 其他）", rows:[
+      {study:"SIRIUS",id:"LB0006",drug:"Sirolimus",ev:"clinical",val:"高血脂、白血球低下、月經不規則；嚴重不良事件罕見"},
+      {study:"Phase IIb",id:"POS0712",drug:"Orelabrutinib",ev:"clinical",val:"多為輕中度不良事件"},
+      {study:"WILLOW LTE",id:"OP0337",drug:"Enpatoran",ev:"clinical",val:"安全性與耐受性良好"},
+    ]},
+    {name:"長期安全性（真實世界 / 登錄）", rows:[
+      {study:"SABLE",id:"POS0077",drug:"Belimumab",ev:"realworld",val:"5 年特別關注不良事件（感染、惡性腫瘤）發生率"},
+      {study:"西班牙 RWE",id:"AB1203",drug:"Anifrolumab",ev:"realworld",val:"2 年；重度血液學表現之安全性與類固醇節省"},
+      {study:"序貫 RWE",id:"POS1069",drug:"Anifrolumab",ev:"realworld",val:"不良事件與停藥頻率與未用 belimumab 者相似"},
+    ]},
+  ]
+};
+
+// 各摘要 DOI（取自 EULAR 2026 Abstract Book）
+const DOI = {"LB0007":"10.1136/annrheumdis-2026-eular.LBA_B.62","LB0006":"10.1136/annrheumdis-2026-eular.LBA_B.52","LB0004":"10.1136/annrheumdis-2026-eular.LBA_B.26","POS0712":"10.1136/annrheumdis-2026-eular.B.2253","OP0337":"10.1136/annrheumdis-2026-eular.B.1111","POS0438":"10.1136/annrheumdis-2026-eular.B.3519","POS1179":"10.1136/annrheumdis-2026-eular.B.3158","AB1131":"10.1136/annrheumdis-2026-eular.B.2431","OP0340":"10.1136/annrheumdis-2026-eular.B.4084","OP0341":"10.1136/annrheumdis-2026-eular.B.497","POS0374":"10.1136/annrheumdis-2026-eular.B.1728","POS0310":"10.1136/annrheumdis-2026-eular.B.202","POS0683":"10.1136/annrheumdis-2026-eular.B.1977","POS0723":"10.1136/annrheumdis-2026-eular.B.2117","POS0686":"10.1136/annrheumdis-2026-eular.B.1271","POS0691":"10.1136/annrheumdis-2026-eular.B.1345","OP0219":"10.1136/annrheumdis-2026-eular.B.1240","OP0342":"10.1136/annrheumdis-2026-eular.B.1076","AB1203":"10.1136/annrheumdis-2026-eular.B.1698","POS0077":"10.1136/annrheumdis-2026-eular.B.632","POS1052":"10.1136/annrheumdis-2026-eular.B.2750","POS1365":"10.1136/annrheumdis-2026-eular.B.4352","POS0703":"10.1136/annrheumdis-2026-eular.B.3050","AB1198":"10.1136/annrheumdis-2026-eular.B.3423","POS0702":"10.1136/annrheumdis-2026-eular.B.4606","AB1101":"10.1136/annrheumdis-2026-eular.B.2718","POS1068":"10.1136/annrheumdis-2026-eular.B.322","AB1139":"10.1136/annrheumdis-2026-eular.B.483","AB0522":"10.1136/annrheumdis-2026-eular.B.2091","POS1375":"10.1136/annrheumdis-2026-eular.B.327","POS0692":"10.1136/annrheumdis-2026-eular.B.2066","AB1070":"10.1136/annrheumdis-2026-eular.B.3340","POS0684":"10.1136/annrheumdis-2026-eular.B.4152","OP0123":"10.1136/annrheumdis-2026-eular.B.1217","OP0232":"10.1136/annrheumdis-2026-eular.B.4614","POS0695":"10.1136/annrheumdis-2026-eular.B.4040","POS0714":"10.1136/annrheumdis-2026-eular.B.1339","POS0721":"10.1136/annrheumdis-2026-eular.B.1833","POS0725":"10.1136/annrheumdis-2026-eular.B.1340","POS1069":"10.1136/annrheumdis-2026-eular.B.2490","AB1068":"10.1136/annrheumdis-2026-eular.B.2536","AB1104":"10.1136/annrheumdis-2026-eular.B.1753","AB1133":"10.1136/annrheumdis-2026-eular.B.1337","AB1136":"10.1136/annrheumdis-2026-eular.B.2591","AB1144":"10.1136/annrheumdis-2026-eular.B.191","AB1209":"10.1136/annrheumdis-2026-eular.B.565","OP0218":"10.1136/annrheumdis-2026-eular.B.1881","POS1055":"10.1136/annrheumdis-2026-eular.B.3006","POS1070":"10.1136/annrheumdis-2026-eular.B.2756","AB1096":"10.1136/annrheumdis-2026-eular.B.1452","AB1116":"10.1136/annrheumdis-2026-eular.B.1596","AB1158":"10.1136/annrheumdis-2026-eular.B.1269","AB1216":"10.1136/annrheumdis-2026-eular.B.3844","AB1215":"10.1136/annrheumdis-2026-eular.B.3844","OP0338":"10.1136/annrheumdis-2026-eular.B.3846","POS0308":"10.1136/annrheumdis-2026-eular.B.1589","POS0413":"10.1136/annrheumdis-2026-eular.B.3323","POS0717":"10.1136/annrheumdis-2026-eular.B.1876","POS1061":"10.1136/annrheumdis-2026-eular.B.2255","AB1153":"10.1136/annrheumdis-2026-eular.B.290","POS0696":"10.1136/annrheumdis-2026-eular.B.2866","AB1097":"10.1136/annrheumdis-2026-eular.B.597"};
+
+</script>
+<script>
+// SLE EULAR 2026 研究資料
+// section: clinical / realworld / guideline
+// pop: adult / pediatric
+// drugClass for grouping & filter; JAKi first, Belimumab pinned top within its class
+const DATA = [
+  // ============ JAK / TYK2 抑制劑 (第一類) ============
+  {id:"POS0695", pop:"adult", section:"clinical", drugClass:"JAK/TYK2 抑制劑", drug:"Deucravacitinib",
+   trial:"PAISLEY SLE + LTE", design:"第 2 期 RCT 整合事後分析", n:"PAISLEY 第 2 期族群", country:"國際",
+   indication:"SLE（達標 LLDAS/DORIS）",
+   title_en:"Long-Term Disease Control in SLE Using LLDAS and DORIS Criteria: Integrated Post Hoc Analyses from the PAISLEY SLE and LTE Trials",
+   title_zh:"以 LLDAS 與 DORIS 標準評估 SLE 長期疾病控制：PAISLEY SLE 與長期延伸試驗整合事後分析",
+   bg:"Deucravacitinib 為口服選擇性 TYK2 抑制劑；本分析整合 PAISLEY 第 2 期與長期延伸（LTE）資料,評估其達成並維持低疾病活動度與緩解的能力。",
+   results:"持續使用 deucravacitinib 者較由安慰劑交叉者「更快」達到 LLDAS 與 DORIS 緩解,且維持反應「更久」;連續治療一般與「首次復發時間延後」相關。交叉組亦呈現持久反應。",
+   concl:"支持 deucravacitinib 進入第 3 期 POETYK SLE 試驗,並具長期治療價值。"},
+
+  // ============ B 細胞調節：Belimumab (重點,置頂) ============
+  {id:"POS0077", pop:"adult", section:"realworld", drugClass:"Belimumab（BLyS/BAFF）", drug:"Belimumab", star:true,
+   trial:"SABLE Registry", design:"全球前瞻性觀察登錄", n:"登錄世代", country:"全球多國",
+   indication:"SLE（5 年安全性）",
+   title_en:"Five-Year Safety of Belimumab in SLE: Insights from the Global, Prospective, Observational SABLE Registry",
+   title_zh:"Belimumab 治療 SLE 之五年安全性：全球前瞻性觀察 SABLE 登錄之洞察",
+   bg:"Belimumab 為標靶 BLyS 的 B 細胞調節劑;本研究運用全球前瞻性 SABLE 登錄評估使用與未使用 belimumab 患者之特別關注不良事件（AESI）。",
+   results:"五年期間呈現感染、惡性腫瘤等特別關注不良事件之發生率,補充隨機試驗外、更貼近真實世界長期用藥之安全性資訊。",
+   concl:"長期登錄資料支持 belimumab 長期使用的安全性特徵。"},
+  {id:"POS1052", pop:"adult", section:"realworld", drugClass:"Belimumab（BLyS/BAFF）", drug:"Belimumab", star:true,
+   trial:"SMiLE 多中心世代", design:"多中心回溯世代", n:"米蘭 4 中心", country:"義大利",
+   indication:"SLE（緩解期減量）",
+   title_en:"Belimumab Step-Down Dose Spacing in Patients with SLE in Persistent Clinical Remission: Experience from a Multicentre Cohort",
+   title_zh:"持續臨床緩解 SLE 患者 Belimumab 階梯式間隔延長：多中心世代經驗",
+   bg:"2023 EULAR 建議對長期緩解者考慮逐步減量;本研究評估持續緩解 SLE 患者 belimumab 間隔延長與停藥之可行性與安全性。",
+   results:"以 SLEDAI-2K 監測減量/停藥期間疾病活動度,記錄 DORIS 緩解與 LLDAS 達成率、血清學活動及類固醇劑量變化,主要觀察 SLE 復發。",
+   concl:"為緩解期 belimumab 去階梯化提供實務證據。"},
+  {id:"POS1365", pop:"adult", section:"realworld", drugClass:"Belimumab（BLyS/BAFF）", drug:"Belimumab", star:true,
+   trial:"BeRLiSS（全國世代）", design:"全國多中心觀察世代", n:"全國世代", country:"義大利",
+   indication:"SLE（停藥與復發）",
+   title_en:"The Use of Belimumab in SLE in Real Life: Analysis of Drug Discontinuation and Flares from a Multicentric, Nationwide Italian Cohort (BeRLiSS-JS 2.0)",
+   title_zh:"Belimumab 治療 SLE 之真實世界：義大利全國多中心世代之停藥與復發分析（BeRLiSS-JS 2.0）",
+   bg:"運用義大利全國 BeRLiSS 世代,分析 belimumab 的停藥與各類復發。",
+   results:"共記錄 282 次復發,以關節（36.5%）、皮膚（26.6%）、血液學（14.2%）最常見;關節復發率最高 13.61/100 人年。Belimumab 起始後所有復發類型的中位年化復發率均顯著下降（p<0.001）;單藥與合併治療首次復發時間相似（p=0.504）。",
+   concl:"真實世界顯示 belimumab 顯著降低各器官領域復發頻率。"},
+  {id:"AB1068", pop:"adult", section:"realworld", drugClass:"Belimumab（BLyS/BAFF）", drug:"Belimumab", star:true,
+   trial:"單中心世代", design:"單中心世代研究", n:"82 名", country:"義大利",
+   indication:"SLE（達標時間 Ti2T）",
+   title_en:"Time to Target in SLE Patients Treated with Belimumab: Data from a Single-Center Cohort",
+   title_zh:"Belimumab 治療 SLE 患者之達標時間：單中心世代資料",
+   bg:"首個評估 belimumab 治療 SLE 患者「達標時間（Ti2T）」的研究。",
+   results:"納入 82 名治療 ≥12 個月患者（女性 76/6,中位病程 198 個月）。治療指徵以關節（43.9%）最多,其次腎臟（21.9%）、皮膚（13.4%）。依達標時間與維持狀況辨識出不同反應分群,在臨床表型上彼此相異。",
+   concl:"以達標時間分群有助個別化評估 belimumab 反應。"},
+  {id:"AB1104", pop:"adult", section:"realworld", drugClass:"Belimumab（BLyS/BAFF）", drug:"Belimumab", star:true,
+   trial:"縱貫觀察", design:"縱貫觀察研究", n:"63 名", country:"瑞典/義大利",
+   indication:"SLE（內皮功能）",
+   title_en:"Effects of Belimumab on Markers of Endothelial Function in SLE",
+   title_zh:"Belimumab 對 SLE 患者內皮功能標記之影響",
+   bg:"心血管病為 SLE 主要死因,主要由內皮功能失調驅動;本研究評估 belimumab 對內皮活化與全身發炎標記之縱貫影響。",
+   results:"63 名 SLE 患者（女男比 9.5:1,平均 41.5 歲）。第 6 個月相較基線:E-selectin 顯著下降（p=0.0014）、ICAM-1 下降（p=0.0496）、VCAM-1 下降（p=0.0002）、ANGPT2 下降。",
+   concl:"Belimumab 改善內皮活化標記,提示潛在血管保護效益。"},
+  {id:"POS0144_serositis", realId:"AB1144", pop:"adult", section:"realworld", drugClass:"Belimumab（BLyS/BAFF）", drug:"Belimumab", star:true,
+   trial:"全國真實世界研究", design:"全國真實世界世代", n:"100 名 / 180 次發作", country:"法國",
+   indication:"狼瘡相關漿膜炎",
+   title_en:"Relapse Risk of Lupus-Related Serositis According to Immunosuppressive Therapy: A National Real-World Study",
+   title_zh:"狼瘡相關漿膜炎依免疫抑制治療之復發風險：全國真實世界研究",
+   bg:"漿膜炎影響高達 46% SLE 患者,但治療多由其他表現外推;本研究評估各免疫抑制治療之復發風險。",
+   results:"100 名患者、180 次漿膜炎發作（心包炎 161、胸膜炎 51）。初始抗發炎治療 87.1% 有效。傳統免疫抑制治療未改善無復發存活;惟 belimumab 與「顯著降低漿膜炎復發風險」相關。",
+   concl:"提示 B 細胞標靶治療於預防狼瘡漿膜炎復發的潛在角色。"},
+
+  // ============ FcRn 阻斷 ============
+  {id:"LB0007", pop:"adult", section:"clinical", drugClass:"FcRn 阻斷劑", drug:"Nipocalimab",
+   trial:"JASMINE-SLE", design:"第 2 期、隨機、雙盲、安慰劑對照", n:"228 名", country:"國際",
+   indication:"中重度 SLE",
+   title_en:"Nipocalimab in SLE: First-in-Class Efficacy and Safety Results Demonstrating Proof of Concept for FcRn Blockade from the Phase 2 JASMINE-SLE Study",
+   title_zh:"Nipocalimab 治療 SLE：首創 FcRn 阻斷之概念驗證療效與安全性結果（第 2 期 JASMINE-SLE）",
+   bg:"首個於 SLE 評估 FcRn 阻斷的第 2 期試驗,nipocalimab 經阻斷 IgG 與 FcRn 結合降低致病性自體抗體與免疫複合體。",
+   results:"第 24 週 SRI-4:15mg/kg 組 53.5% 對安慰劑 46.7%（依預設 α=0.1 達顯著）;第 52 週 SRI-4 53.6% 對 39.7%、LLDAS 37.5% 對 20.5%。自體抗體高量族群療效更顯著（LLDAS 53.5% 對 11.1%,Δ42.4）;IFN 高量族群第 52 週 SRI-4 57.1% 對 33.3%（p=0.005）。嚴重感染率各組相近。",
+   concl:"確立 FcRn 阻斷於 SLE 的概念驗證。"},
+
+  // ============ mTOR 抑制劑 ============
+  {id:"LB0006", pop:"adult", section:"clinical", drugClass:"mTOR 抑制劑", drug:"Sirolimus",
+   trial:"SIRIUS", design:"多中心、雙盲、隨機對照試驗", n:"146 名", country:"中國（6 中心）",
+   indication:"活動性 SLE",
+   title_en:"Sirolimus in Active SLE: A Multicenter Double-Blind Randomized Controlled Trial (SIRIUS)",
+   title_zh:"Sirolimus 治療活動性 SLE：多中心雙盲隨機對照試驗（SIRIUS）",
+   bg:"首個評估 mTOR 抑制劑 sirolimus 治療活動性 SLE 的多中心雙盲 RCT;患者接受 sirolimus 1.5mg/日或安慰劑加標準治療 24 週。",
+   results:"第 24 週 SRI-4:52.9% 對安慰劑 22.7%（差異 30.2%,P<0.001）;BICLA 60.0% 對 32.2%;SLEDAI-2K、PGA 下降,C3/C4 上升,anti-dsDNA 下降均顯著較佳。常見不良事件為高血脂、白血球低下、月經不規則。",
+   concl:"首個證實 mTOR 抑制可作 SLE 治療選項的多中心 RCT。"},
+
+  // ============ TLR7/8 抑制劑 ============
+  {id:"OP0337", pop:"adult", section:"clinical", drugClass:"TLR7/8 抑制劑", drug:"Enpatoran",
+   trial:"WILLOW LTE", design:"第 2 期長期延伸（48 週）", n:"WILLOW 族群", country:"國際",
+   indication:"皮膚型狼瘡",
+   title_en:"Safety and Efficacy of Enpatoran in Lupus: Results from the First 48 Weeks of the Phase II WILLOW Long-Term Extension Study",
+   title_zh:"Enpatoran 治療狼瘡之安全性與療效：第 II 期 WILLOW 長期延伸前 48 週結果",
+   bg:"Enpatoran 為口服選擇性可逆 TLR7/8 雙重抑制劑,作用於干擾素路徑上游;本為 WILLOW 第 2 期之 48 週長期延伸。",
+   results:"延伸期第 48 週各劑量組 CLASI-A 0–3 達成率 57.7%–63.4%,並維持高比例 CLASI-50/70 反應,顯示持續且臨床有意義的皮膚活動度改善。安全性與耐受性良好。",
+   concl:"支持 enpatoran 進一步於皮膚狼瘡評估。"},
+
+  // ============ anti-BDCA2 ============
+  {id:"POS0438", pop:"adult", section:"clinical", drugClass:"anti-BDCA2 抗體", drug:"Litifilimab",
+   trial:"AMETHYST Part A", design:"隨機、雙盲、安慰劑對照（24 週）", n:"AMETHYST 族群", country:"國際",
+   indication:"皮膚型狼瘡（CLE）",
+   title_en:"Litifilimab Improves Cutaneous Lupus Erythematosus Disease Activity: 24-Week CLASI-A Change from Baseline in AMETHYST Part A",
+   title_zh:"Litifilimab 改善皮膚型狼瘡疾病活動度：AMETHYST Part A 之 24 週 CLASI-A 自基線變化",
+   bg:"Litifilimab 標靶漿細胞樣樹突細胞 BDCA2;本為 AMETHYST Part A 之皮膚狼瘡療效評估。",
+   results:"CLA-IGA-R 清除/接近清除:第16週 14.7% 對 2.9%、第24週 19.0% 對 4.2%（均 p<0.05）;CLASI-50 於第24週 40.8% 對 21.0%（p<0.05）,第4週即分離;CLASI-A 最小平方平均變化第16、24週 −14.1、−18.7（均 p<0.05）。",
+   concl:"支持進入 AMETHYST Part B（第 3 期）。"},
+  {id:"AB1215", realId:"AB1215", pop:"adult", section:"clinical", drugClass:"anti-BDCA2 抗體", drug:"Litifilimab",
+   trial:"暴露–反應分析", design:"族群藥動/藥效暴露–反應分析", n:"SLE 族群", country:"國際",
+   indication:"SLE",
+   title_en:"Exposure-Response Relationship between Litifilimab and Clinical Outcomes in SLE Populations",
+   title_zh:"Litifilimab 暴露–反應關係與 SLE 族群臨床結果",
+   bg:"分析 litifilimab 藥物暴露程度與臨床結果之關係,以支持劑量最適化。",
+   results:"建立暴露–反應模型,量化不同暴露下的療效特徵,為 litifilimab 於 SLE 的劑量與標籤決策提供依據。",
+   concl:"暴露–反應分析支持 litifilimab 劑量最適化。"},
+
+  // ============ BTK 抑制劑 ============
+  {id:"POS0712", pop:"adult", section:"clinical", drugClass:"BTK 抑制劑", drug:"Orelabrutinib",
+   trial:"第 IIb 期 RCT", design:"隨機、安慰劑對照（48 週）", n:"187 名", country:"中國",
+   indication:"活動性 SLE",
+   title_en:"Orelabrutinib in Active SLE: A Phase IIb Randomized Controlled Trial",
+   title_zh:"Orelabrutinib 治療活動性 SLE：第 IIb 期隨機對照試驗",
+   bg:"首個顯示 BTK 抑制劑於 SLE 療效的研究;患者隨機分為 orelabrutinib 50mg、75mg/日或安慰劑。",
+   results:"第48週 SRI-4:75mg 組 57.1%（對安慰劑 34.4%,p=0.01）,50mg 組 45%（未顯著）,呈劑量依存;75mg 組 SRI-6 與 BICLA 亦優於安慰劑。基線類固醇>7.5mg/日者 75mg 組 71.1% 降至 ≤7.5mg/日（安慰劑 43.6%）。",
+   concl:"首個 BTK 抑制劑於 SLE 達療效的第 IIb 期 RCT。"},
+
+  // ============ anti-CD38 ============
+  {id:"OP0340", pop:"adult", section:"clinical", drugClass:"anti-CD38 抗體", drug:"Daratumumab",
+   trial:"DARALUP", design:"單中心、開放標籤第 2 期長期延伸", n:"10 名", country:"德國",
+   indication:"難治型 SLE",
+   title_en:"Safety and Efficacy of Daratumumab in Treatment-Refractory SLE: Results from the Long-Term Extension of a Phase 2 Trial",
+   title_zh:"Daratumumab 治療難治型 SLE 之安全性與療效：第 2 期長期延伸結果（DARALUP）",
+   bg:"Daratumumab 標靶 CD38、清除長壽命抗體分泌細胞;患者接受 8 次每週皮下 1800mg。",
+   results:"第12週 anti-dsDNA 顯著下降（中位 61.5%,p=0.002）,SLEDAI-2K 由 12 降至 4,100% 達 SRI-4;循環抗體分泌細胞清除、干擾素活性下降。追蹤期 6/10 於第 20–61 週復發,皆對 belimumab 反應。無嚴重不良事件。",
+   concl:"確立 CD38 為 SLE 新治療標靶。"},
+
+  // ============ CD19 細胞療法 ============
+  {id:"OP0341", pop:"adult", section:"clinical", drugClass:"CD19 CAR-T / 細胞療法", drug:"Obe-cel (CD19 CAR-T)",
+   trial:"CARLYSLE", design:"單臂、開放標籤、劑量探索第 I 期", n:"11 名輸注（含 2 青少年）", country:"國際",
+   indication:"重症難治型 SLE",
+   title_en:"Obecabtagene Autoleucel (Obe-cel) CD19 CAR T-cell Therapy in Severe Refractory SLE: Phase I (CARLYSLE)",
+   title_zh:"Obe-cel（CD19 CAR-T）治療重症難治型 SLE：第 I 期（CARLYSLE）",
+   bg:"自體 4-1BBζ CD19 CAR-T,具快速解離結合域以降低免疫毒性;含狼瘡腎炎患者。",
+   results:"兩劑量均無 ICANS 或 ≥2級 CRS,僅一例肝損傷列為 DLT。50M 組 5/6（83.3%）達 DORIS 緩解（中位起效 5.1 個月）,3/6 達完全腎臟反應;anti-dsDNA 下降、C3 上升,UPCR 下降、eGFR 穩定或上升。",
+   concl:"早期資料支持 obe-cel 於重症難治型 SLE。"},
+  {id:"POS0374", pop:"adult", section:"clinical", drugClass:"CD19 CAR-T / 細胞療法", drug:"E-CAR-T (新型 CD3ε)",
+   trial:"首次人體（FIH）", design:"首次人體、單次輸注", n:"難治 SLE/SSc", country:"中國",
+   indication:"難治型 SLE",
+   title_en:"First-in-Human Autologous Anti-CD19 E-CAR-T Therapy with a Novel CD3ε Domain Induces Deep Tissue Remission in Refractory Autoimmune Diseases",
+   title_zh:"首創含新型 CD3ε 結構域之自體抗 CD19 E-CAR-T 誘導難治型自體免疫疾病深度組織緩解",
+   bg:"含新型 CD3ε 結構域之自體抗 CD19 E-CAR-T 的首次人體應用,納入難治型 SLE。",
+   results:"無 >2級 CRS、無 ICANS;細胞快速擴增,第3個月仍可偵測。儘管 CAR 消失,所有可評估者達持久緩解;SLE 患者 SLEDAI 下降、24h 尿蛋白降低、第10個月腎臟切片改善。重建 B 細胞呈幼稚多株、無耗竭表型。",
+   concl:"E-CAR-T 於難治型 SLE 展現安全性與深度緩解。"},
+  {id:"POS1179", pop:"adult", section:"clinical", drugClass:"CD19 T 細胞銜接器", drug:"CLN-978",
+   trial:"第 1 期", design:"第 1 期、皮下投予", n:"RA 與 SLE", country:"國際",
+   indication:"RA / SLE",
+   title_en:"CLN-978, a Bispecific CD19×CD3 T Cell Engager, Induces Robust B Cell Depletion in Patients with Rheumatoid Arthritis and SLE",
+   title_zh:"CLN-978（皮下 CD19×CD3 T 細胞銜接器）於類風濕性關節炎與 SLE 誘導強效 B 細胞清除",
+   bg:"CLN-978 為皮下投予 CD19×CD3 T 細胞銜接器,提供 CAR-T 替代之現成型方案。",
+   results:"於 RA 與 SLE 患者誘導強效 B 細胞清除,含滑膜組織內 CD19+ B 細胞完全清除;靈長類研究顯示週邊血及組織內低於偵測極限之深度清除。",
+   concl:"支持以皮下、現成型 T 細胞銜接器治療難治型自體免疫疾病。"},
+  {id:"LB0004", pop:"adult", section:"clinical", drugClass:"CD19 T 細胞銜接器", drug:"CC312",
+   trial:"第 1 期", design:"開放標籤、3+3 劑量爬升", n:"靜脈組 12 名", country:"中國",
+   indication:"難治型自體免疫疾病（含 SLE）",
+   title_en:"CC312, a Novel CD19/CD3/CD28 Tri-specific T Cell Engager, Demonstrates Sustained SRI-4 Responses Beyond One Year",
+   title_zh:"CC312（CD19/CD3/CD28 三特異性 T 細胞銜接器）SRI-4 反應維持逾一年",
+   bg:"整合 CD28 共刺激、CD3 與 CD19 標靶之三特異性銜接器,克服傳統雙特異性銜接器的 T 細胞耗竭。",
+   results:"靜脈組 12 名第36週 83.3% 達 SRI-4,達反應者 100% 維持;2 名完成 52 週者持續維持。最高劑量下無 DLT、ICANS 或 ≥2級 CRS;週邊與骨髓 CD19+ B 細胞快速近乎完全清除。2 名重症達 DORIS 緩解。",
+   concl:"展現持久療效與良好安全性,皮下劑型已開始收案。"},
+
+  // ============ SGLT2 抑制劑 ============
+  {id:"AB1131", pop:"adult", section:"clinical", drugClass:"SGLT2 抑制劑", drug:"Dapagliflozin",
+   trial:"臨床研究 / 真實世界", design:"臨床研究", n:"MLN 族群", country:"墨西哥",
+   indication:"膜性狼瘡腎炎（MLN）",
+   title_en:"Efficacy of Dapagliflozin in Reducing Proteinuria and Improving Renal Function in Membranous Lupus Nephritis",
+   title_zh:"Dapagliflozin 降低膜性狼瘡腎炎蛋白尿並改善腎功能之療效",
+   bg:"膜性狼瘡腎炎約佔 LN 20%,推薦多標靶治療並併用 SGLT2 抑制劑;LN 中已報告 SGLT2 過度表現。",
+   results:"於標準免疫治療基礎上加用 dapagliflozin,評估降低蛋白尿與改善腎功能之效果,補充既有觀察性與分歧之臨床試驗證據。",
+   concl:"支持 dapagliflozin 作為 MLN 輔助性腎臟保護策略。"},
+
+  // ============ anti-CD20 / Obinutuzumab ============
+  {id:"POS0310", pop:"adult", section:"clinical", drugClass:"anti-CD20（Obinutuzumab）", drug:"Obinutuzumab",
+   trial:"ALLEGORY（第 III 期）", design:"第 III 期 RCT（藥效學分析）", n:"ALLEGORY 族群", country:"國際",
+   indication:"活動性 SLE",
+   title_en:"SLE: Pharmacodynamic Effects of Obinutuzumab — Phase III ALLEGORY",
+   title_zh:"Obinutuzumab 於 SLE 之藥效學效應——第 III 期 ALLEGORY",
+   bg:"Obinutuzumab 為第二型醣化工程抗 CD20 抗體,較第一型誘導更強效 B 細胞清除;ALLEGORY 已達第 52 週 SRI-4 主要終點。",
+   results:"OBI 組週邊 CD19+ B 細胞清除快速,第 2 週（第二次輸注前）即大幅下降並持續至第 52 週;anti-dsDNA 第 52 週中位降幅顯著大於安慰劑（−110.5 對 −14.0 IU/mL）。",
+   concl:"確認 OBI 透過深度 B 細胞清除驅動臨床反應之機轉。"},
+  {id:"POS0683", pop:"adult", section:"clinical", drugClass:"anti-CD20（Obinutuzumab）", drug:"Obinutuzumab",
+   trial:"ALLEGORY（第 III 期）", design:"第 III 期 RCT（額外結果）", n:"ALLEGORY 族群", country:"國際",
+   indication:"活動性 SLE（緩解/LLDAS）",
+   title_en:"The Impact of Obinutuzumab on Remission and Low Disease Activity in Active SLE: Additional Results of the Phase III ALLEGORY Trial",
+   title_zh:"Obinutuzumab 對活動性 SLE 緩解與低疾病活動度之影響：第 III 期 ALLEGORY 額外結果",
+   bg:"延續 ALLEGORY 達第 52 週 SRI-4 主要終點,本分析評估 OBI 對 DORIS 緩解與 LLDAS 等更嚴格目標之達成率。",
+   results:"OBI 加標準治療相較安慰劑,提升以達標治療為導向的緩解與低疾病活動度達成率,與先前 REGENCY 試驗一致。",
+   concl:"支持 OBI 達成 SLE 以達標為導向的疾病控制。"},
+  {id:"POS0723", pop:"adult", section:"clinical", drugClass:"anti-CD20（Obinutuzumab）", drug:"Obinutuzumab",
+   trial:"ALLEGORY（第 III 期）", design:"第 III 期 RCT（次要安全性）", n:"ALLEGORY 族群", country:"國際",
+   indication:"活動性 SLE（安全性）",
+   title_en:"Obinutuzumab in SLE: A Secondary Safety Analysis of Infusion-Related Reactions, Infections, Neutropenia and IgG in the Phase III ALLEGORY Trial",
+   title_zh:"Obinutuzumab 治療 SLE：第 III 期 ALLEGORY 之輸注反應、感染、嗜中性球低下與 IgG 次要安全性分析",
+   bg:"聚焦 ALLEGORY 之輸注相關反應、感染、藥物相關嗜中性球低下及 IgG 變化。",
+   results:"藥物相關嗜中性球低下平均於治療後約 157 天發生、持續約 35 天,除各組各一例外多為非嚴重且於第 52 週緩解。52 週內 OBI 組 IgG 平均下降 4.11 g/L,安慰劑組則上升。",
+   concl:"事件多可依方案指引管理,安全性可接受。"},
+
+  // ============ 鈣調磷酸酶抑制劑 Voclosporin ============
+  {id:"POS0686", pop:"adult", section:"clinical", drugClass:"鈣調磷酸酶抑制劑（Voclosporin）", drug:"Voclosporin",
+   trial:"AURORA 1（第 3 期事後）", design:"第 3 期事後分析", n:"AURORA 1 族群", country:"國際",
+   indication:"狼瘡腎炎",
+   title_en:"Voclosporin Associated with a Statistically Significant 53% Reduction in Risk of Renal-Related Event or Death: A Post-Hoc Analysis of the AURORA 1 Phase 3 Study",
+   title_zh:"Voclosporin 與腎臟相關事件或死亡風險顯著下降 53% 相關：AURORA 1 第 3 期事後分析",
+   bg:"狼瘡腎炎第 3 期 AURORA 1 試驗事後分析,評估 voclosporin 對複合腎臟結局的影響。",
+   results:"相較安慰劑,voclosporin 與「腎臟相關事件或死亡風險顯著下降 53%」相關,凸顯其長期腎臟保護潛在效益。",
+   concl:"強化 voclosporin 作為狼瘡腎炎多標靶治療一環的證據。"},
+  {id:"POS0691", pop:"adult", section:"realworld", drugClass:"鈣調磷酸酶抑制劑（Voclosporin）", drug:"Voclosporin",
+   trial:"BILAG-BR 登錄", design:"真實世界登錄", n:"英國 LN 患者", country:"英國",
+   indication:"狼瘡腎炎",
+   title_en:"Real-World Use of Voclosporin in UK Lupus Nephritis Patients: Results from the BILAG Biologics Registry (BILAG-BR)",
+   title_zh:"Voclosporin 於英國狼瘡腎炎患者之真實世界使用：BILAG 生物製劑登錄結果（BILAG-BR）",
+   bg:"運用英國 BILAG-BR 登錄,呈現 voclosporin 於真實世界狼瘡腎炎患者的使用、療效與安全性。",
+   results:"真實世界資料納入更廣泛、共病更多族群,補充 AURORA 試驗證據,反映臨床實務中的治療反應與耐受性。",
+   concl:"釐清 voclosporin 於英國狼瘡腎炎照護的定位。"},
+
+  // ============ anti-IFNAR Anifrolumab ============
+  {id:"OP0219", pop:"adult", section:"realworld", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab",
+   trial:"ASTER", design:"前瞻性觀察（中期）", n:"ASTER 族群", country:"歐洲多國",
+   indication:"SLE（DORIS/LLDAS）",
+   title_en:"DORIS Remission and LLDAS Attainment after up to 12 Months of Real-World Anifrolumab Treatment: Interim Results from the ASTER Study",
+   title_zh:"真實世界 Anifrolumab 治療達 12 個月後 DORIS 緩解與 LLDAS 達成：ASTER 研究中期結果",
+   bg:"ASTER 為前瞻性觀察研究,評估真實世界 anifrolumab 達成 DORIS 緩解與 LLDAS（維持逾 3 個月對器官損傷具保護性）的情形。",
+   results:"報告真實世界使用 anifrolumab 達 12 個月後達成 DORIS 緩解與 LLDAS 的比例,補充臨床試驗證據。",
+   concl:"支持 anifrolumab 於日常照護協助達成達標目標。"},
+  {id:"OP0342", pop:"adult", section:"realworld", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab",
+   trial:"ASTER", design:"前瞻性觀察（中期）", n:"ASTER 族群", country:"歐洲多國",
+   indication:"SLE（多器官）",
+   title_en:"Improved SLE Disease Activity across Multiple Organ Systems after up to 12 Months of Real-World Treatment with Anifrolumab: Interim Results from the ASTER Study",
+   title_zh:"Anifrolumab 真實世界治療達 12 個月後多器官系統 SLE 疾病活動度改善：ASTER 中期結果",
+   bg:"ASTER 前瞻性觀察研究,評估 anifrolumab 真實世界治療達 12 個月後跨多器官系統的疾病活動度改善。",
+   results:"呈現 anifrolumab 在皮膚、關節等不同器官領域的活動度下降,反映其對 SLE 多系統表現的整體療效。",
+   concl:"補充第 III 期證據,支持 anifrolumab 作為中重度 SLE 治療選項。"},
+  {id:"AB1203", pop:"adult", section:"realworld", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab",
+   trial:"西班牙多中心研究", design:"真實世界多中心（2 年）", n:"重度血液學 SLE", country:"西班牙",
+   indication:"伴重度血液學表現之 SLE",
+   title_en:"Anifrolumab in SLE with Severe Haematologic Manifestations: 2-Year Data from a Spanish Multicentre Study",
+   title_zh:"Anifrolumab 治療伴重度血液學表現之 SLE：西班牙多中心 2 年資料",
+   bg:"重度血液學受累為 SLE 較少於試驗中專門評估的領域;本研究填補此證據缺口。",
+   results:"呈現 anifrolumab 治療達 2 年對血液學參數的改善與類固醇節省效果。",
+   concl:"支持 anifrolumab 於合併重度血液學表現 SLE 的真實世界價值。"},
+  {id:"AB1133", pop:"adult", section:"clinical", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab (皮下)",
+   trial:"TULIP-SC", design:"第 3 期、隨機、安慰劑對照", n:"中重度 SLE", country:"國際",
+   indication:"中重度 SLE（PRO）",
+   title_en:"The Impact of Subcutaneous Anifrolumab on Patient-Reported Outcomes in Patients with SLE: Results from the Phase 3 TULIP-SC Trial",
+   title_zh:"皮下 Anifrolumab 對 SLE 患者報告結果之影響：第 3 期 TULIP-SC 試驗結果",
+   bg:"TULIP-SC 第 3 期試驗證實皮下 anifrolumab 120mg 每週於中重度 SLE 之療效與安全性,與靜脈劑型一致;本為 PRO 預設探索分析。",
+   results:"評估皮下 anifrolumab 對疲勞與健康相關生活品質（HRQoL）之影響,於 52 週相較安慰劑呈現臨床有意義改善。",
+   concl:"皮下 anifrolumab 改善 SLE 患者報告之疲勞與生活品質。"},
+  {id:"POS0714", pop:"adult", section:"realworld", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab",
+   trial:"LASER（4 年）", design:"配對比較分析（4 年）", n:"TULIP vs 真實世界 SOC", country:"國際/加拿大",
+   indication:"SLE（器官損傷累積）",
+   title_en:"Treatment with Anifrolumab Prevents Organ Damage Accrual Compared with Real-World Standard of Care in Patients with SLE: Analysis of the LASER Study over 4 Years",
+   title_zh:"Anifrolumab 相較真實世界標準治療可預防 SLE 器官損傷累積：LASER 研究 4 年分析",
+   bg:"LASER 研究比較 TULIP 試驗中接受 anifrolumab 者與多倫多狼瘡門診真實世界標準治療對照,先前已顯示 4 年器官損傷累積較少;本次依基線有無器官損傷分層。",
+   results:"於有與無基線器官損傷（SDI=0 與 SDI≥1）兩亞群分別評估;anifrolumab 相較真實世界標準治療延後首次器官損傷進展時間,並減少 4 年 SDI 自基線之平均變化。",
+   concl:"anifrolumab 可預防 SLE 器官損傷累積,不論基線有無既存損傷。"},
+  {id:"AB1136", pop:"adult", section:"realworld", drugClass:"anti-CD20（Rituximab）", drug:"Rituximab",
+   trial:"真實世界世代", design:"真實世界世代研究", n:"SLE 世代", country:"英國",
+   indication:"SLE（rituximab 後升級）",
+   title_en:"Treatment Escalation after Rituximab in SLE is Driven by Serology Rather than Baseline Clinical Activity: A Real-World Cohort",
+   title_zh:"SLE 患者 Rituximab 後的治療升級由血清學而非基線臨床活動度決定：真實世界世代",
+   bg:"Rituximab 雖未達隨機試驗主要終點,仍廣泛用於難治型 SLE;真實世界決策常受血清學活動、器官風險與類固醇依賴驅動。",
+   results:"血清學活動（而非基線 SLEDAI-2K 或臨床表型）為治療升級的最強預測因子,優於 SLEDAI-2K 與臨床表型。",
+   concl:"支持以血清學導向、風險分層的 rituximab 後監測與處置策略。"},
+  {id:"POS0717", pop:"adult", section:"realworld", drugClass:"生物製劑啟動時機", drug:"Belimumab/Anifrolumab/Rituximab",
+   trial:"回溯性研究", design:"回溯性研究（2010–2025）", n:"84 名", country:"西班牙",
+   indication:"SLE（生物製劑啟動時機）",
+   title_en:"Does Timing Matter? Biologic Initiation in SLE",
+   title_zh:"時機重要嗎？SLE 生物製劑啟動時機",
+   bg:"2023 ACR/EULAR 將 belimumab 與 anifrolumab 列為中高活動度第一線、rituximab 保留給難治病例;本研究比較診斷後 2 年內 vs 較晚啟動生物製劑者。",
+   results:"84 名（早期 16、晚期 68）。早期啟動者診斷時年齡較高（45.2 vs 32.8 歲);早期組 belimumab 68.8%、anifrolumab 12.5%,晚期組 belimumab 52.9%;分析停藥與藥物存活。",
+   concl:"生物製劑啟動時機反映疾病表型與治療策略差異。"},
+  {id:"POS0721", pop:"adult", section:"realworld", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab",
+   trial:"多中心真實世界", design:"真實世界多中心（12 個月）", n:"96 名", country:"保加利亞",
+   indication:"SLE",
+   title_en:"Real-World Effectiveness of Anifrolumab in SLE: 12-Month Multicenter Data",
+   title_zh:"Anifrolumab 治療 SLE 之真實世界療效：12 個月多中心資料",
+   bg:"Anifrolumab 標靶第一型干擾素受體,於 RCT 已證實療效;本研究提供真實世界療效與安全性。",
+   results:"96 名患者（90.6% 女性,平均 47.2 歲）;黏膜皮膚與關節受累最常見（91.7%、94.8%）。63 名完成 12 個月追蹤,疾病活動度隨時間顯著下降（p<0.001,Kendall's W=0.82）。",
+   concl:"真實世界支持 anifrolumab 顯著降低疾病活動度。"},
+  {id:"POS0725", pop:"adult", section:"realworld", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab",
+   trial:"學術狼瘡登錄", design:"觀察登錄、真實世界", n:"學術登錄", country:"美國",
+   indication:"SLE（DORIS 緩解）",
+   title_en:"Anifrolumab Treatment is Associated with DORIS Remission in Adults with SLE: Real-World Outcomes from an Academic Lupus Registry",
+   title_zh:"Anifrolumab 治療與成人 SLE 達 DORIS 緩解相關：學術狼瘡登錄之真實世界結果",
+   bg:"運用學術狼瘡登錄,評估 anifrolumab 與成人 SLE 患者達成 DORIS 緩解之關聯。",
+   results:"呈現真實世界 anifrolumab 治療下 DORIS 緩解的達成情形與類固醇變化,補充 TULIP/LTE 試驗證據。",
+   concl:"支持 anifrolumab 於真實世界協助達成 DORIS 緩解。"},
+  {id:"POS1069", pop:"adult", section:"realworld", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab",
+   trial:"多中心觀察", design:"觀察性多中心研究", n:"241 名", country:"西班牙",
+   indication:"中重度 SLE（序貫用藥）",
+   title_en:"Does Prior Belimumab Use Influence Response to Anifrolumab in Moderate-to-Severe SLE? Real-World Evidence",
+   title_zh:"先前使用 Belimumab 是否影響中重度 SLE 對 Anifrolumab 的反應？真實世界證據",
+   bg:"Anifrolumab 樞紐試驗排除曾用 belimumab 者;本研究比較曾用 belimumab 與未用者對 anifrolumab 的反應。",
+   results:"241 名（62.7% 曾用 belimumab,37.3% 未用）。兩組肌肉骨骼、黏膜皮膚與全身領域均進步,SLEDAS/SLEDAI-2K 與 PGA 下降幅度相當,類固醇遞減、器官損傷穩定、復發率低,不良事件與停藥頻率相似。",
+   concl:"先前 belimumab 暴露不影響 anifrolumab 療效,支持序貫使用。"},
+  {id:"POS0413", pop:"adult", section:"realworld", drugClass:"anti-IFNAR（Anifrolumab）", drug:"Anifrolumab",
+   trial:"法國經驗", design:"觀察性研究", n:"干擾素病變", country:"法國",
+   indication:"第一型干擾素病變（相關）",
+   title_en:"Real-World Use of Anifrolumab in Genetically Confirmed Type I Interferonopathies: The French Experience",
+   title_zh:"Anifrolumab 用於基因確診第一型干擾素病變之真實世界使用：法國經驗",
+   bg:"Anifrolumab 阻斷第一型干擾素受體;本研究報告其用於基因確診第一型干擾素病變的真實世界使用（與 SLE 機轉相關之罕病）。",
+   results:"呈現 anifrolumab 於干擾素病變患者之臨床改善與干擾素特徵正常化,延伸其於干擾素驅動疾病的應用。",
+   concl:"提供 anifrolumab 於干擾素病變的真實世界經驗。"},
+
+  // ============ Telitacicept (BLyS/APRIL) ============
+  {id:"AB1209", pop:"adult", section:"realworld", drugClass:"BLyS/APRIL（Telitacicept）", drug:"Telitacicept",
+   trial:"前瞻性研究", design:"前瞻性觀察研究", n:"60 名", country:"中國",
+   indication:"SLE",
+   title_en:"Telitacicept Ameliorates Disease Activity and Modulates B Cell Subsets in Chinese Patients with SLE: A Prospective Study",
+   title_zh:"Telitacicept 改善中國 SLE 患者疾病活動度並調節 B 細胞亞群：前瞻性研究",
+   bg:"Telitacicept 為 TACI-Fc 融合蛋白,同時中和 BLyS 與 APRIL,抑制 B 細胞增生與抗體產生。",
+   results:"60 名患者（95% 女性,40 名腎臟受累）。治療 24 週後達 LLDAS 比例由基線 5.00% 持續上升至第 24 週 60.98%;類固醇劑量逐步下降。",
+   concl:"Telitacicept 改善疾病活動度、調節 B 細胞亞群並節省類固醇。"},
+
+  // ============ 達標治療 / 結果測量 / 分類標準（指引類 - adult） ============
+  {id:"POS0703", pop:"adult", section:"guideline", gtype:"指引一致性 / 真實世界", drug:"早期四聯療法",
+   title_en:"Alignment between 2025 EULAR Lupus Nephritis Guidelines and Real-World Practice in Europe: Current Use of Early Quadruple Therapy and Anticipated Impact of Obinutuzumab Approval",
+   title_zh:"2025 EULAR 狼瘡腎炎指引與歐洲真實世界實務之一致性：早期四聯療法現況與 Obinutuzumab 核准之預期影響",
+   points:[
+     "2025 EULAR 倡議「早期四聯療法」:羥氯奎寧 + 類固醇 + MMF/低劑量 CYC + 生物製劑或 CNI。",
+     "88% 風濕科、80% 腎臟科醫師同意此指引。",
+     "目前 39% 風濕科、37% 腎臟科管理之 LN 患者已用含生物製劑/CNI 合併療法。",
+     "兩專科預期未來半年生物製劑與 CNI 使用升至約 50%。",
+     "預期 obinutuzumab 核准將進一步強化早期生物製劑納入四聯療法。"]},
+  {id:"AB1198", pop:"adult", section:"guideline", gtype:"達標治療（T2T）/ 真實世界", drug:"達標治療策略",
+   title_en:"Real-World Feasibility of Treat-to-Target Recommendations in SLE: Analysis of 321 Patients from an Academic Lupus Clinic",
+   title_zh:"SLE 達標治療建議之真實世界可行性：學術狼瘡門診 321 名患者分析",
+   points:[
+     "依 2023 EULAR / 2025 ACR 建議,目標為持續緩解或低疾病活動度,潑尼松 ≤5mg/日。",
+     "321 名患者（88.2% 女性,平均病程 17.1 年);累積 LN 盛行率 37.1%,42.4% SDI>0。",
+     "主要 T2T 終點「無潑尼松緩解」達成率 63.2%。",
+     "SLE-DAS 緩解 80.7%、低疾病活動度 83.8%。",
+     "多數患者可於真實世界達成達標治療目標。"]},
+  {id:"POS0702", pop:"adult", section:"guideline", gtype:"達標目標比較", drug:"LLDAS / LLDAS5 / DORIS",
+   title_en:"Is Lower Better? A Comparative Study of LLDAS, LLDAS5, and DORIS on Disease Stability and Organ Damage in SLE",
+   title_zh:"更低更好嗎？LLDAS、LLDAS5 與 DORIS 對 SLE 疾病穩定性與器官損傷之比較研究",
+   points:[
+     "近期 EULAR 建議維持潑尼松 ≤5mg/日,凸顯更嚴格 LLDAS5 定義之評估需求。",
+     "比較 LLDAS、LLDAS5、DORIS 三者的達成率、維持穩定度與預後。",
+     "評估各目標達成後至復發時間、復發率與 SDI 器官損傷累積。",
+     "為臨床選擇治療目標（尤其更嚴格類固醇門檻）提供實證比較。"]},
+  {id:"AB1101", pop:"adult", section:"guideline", gtype:"達標治療（T2T）結果", drug:"LLDAS / DORIS",
+   title_en:"Treat-to-Target Achievement and Subsequent Flares, Organ Damage Accrual, and Health-Related Quality of Life in SLE: A Prospective Cohort Study (STAR)",
+   title_zh:"SLE 達標治療達成與後續復發、器官損傷累積及健康相關生活品質：前瞻性世代研究（STAR）",
+   points:[
+     "分析 STAR 前瞻性世代 363 名患者、3776 次追蹤。",
+     "檢驗 LLDAS 與/或 DORIS 緩解（尤其持續達成）是否與較佳長期結果相關。",
+     "主要結果為器官損傷累積與疾病復發;次要為生活品質與社會功能。",
+     "支持達標治療策略改善 SLE 長期結果。"]},
+  {id:"POS1068", pop:"adult", section:"guideline", gtype:"新結果測量工具（COA）", drug:"TRM-SLE",
+   title_en:"A New Endpoint for SLE Clinical Trials: The Treatment Response Measure for SLE Clinical Trials (TRM-SLE)",
+   title_zh:"SLE 臨床試驗新終點：SLE 臨床試驗治療反應測量工具（TRM-SLE）",
+   points:[
+     "首個多領域、共識導向、面向法規的 SLE 臨床試驗結果評估工具。",
+     "經名義群組技術排序,定義完全/部分/無反應。",
+     "要求疾病活動度無顯著惡化（PISCOS PGA 自基線惡化 <10%）。",
+     "將於前瞻性 RCT 作為探索性終點進行廣泛驗證。"]},
+  {id:"AB1139", pop:"adult", section:"guideline", gtype:"指引品質評析（AGREE II）", drug:"LN 臨床指引",
+   title_en:"Lupus Nephritis Clinical Practice Guidelines: Critical Appraisal and Quality Comparison using the AGREE II Tool",
+   title_zh:"狼瘡腎炎臨床指引：以 AGREE II 工具進行嚴謹評析與品質比較",
+   points:[
+     "約半數 SLE 患者於病程中出現狼瘡腎炎,為最嚴重表現之一。",
+     "運用 AGREE II 工具評估各 LN 指引的方法學品質。",
+     "涵蓋範圍與目的、利害關係人參與、制定嚴謹度、清晰度、適用性、編輯獨立性。",
+     "協助臨床醫師辨識可信賴的指引依據。"]},
+  {id:"OP0218", pop:"adult", section:"guideline", gtype:"定義 / 分類（srSLE）", drug:"重症難治型 SLE 定義",
+   title_en:"Evaluation of Candidate Definitions of Severe Refractory SLE Using Clinical Outcomes: Real-World Data Exploration Study",
+   title_zh:"以臨床結果評估重症難治型 SLE 候選定義：真實世界資料探索研究",
+   points:[
+     "分析 4,106 名患者、42,355 次就診,評估 80 個候選定義（D1–D80）。",
+     "達成比例由 <2%（最嚴格）至 27%（最寬鬆）。",
+     "以梯度提升模型評估「Top 10」候選定義的預測表現。",
+     "推導出 D53（SLEDAI≥6 + GC≥10 + PGA>1 + 中重度復發）為實用 srSLE 定義。"]},
+  {id:"POS1055", pop:"adult", section:"guideline", gtype:"治療模式 / 登錄分析", drug:"系統性治療模式",
+   title_en:"Systemic Treatment Patterns in SLE: Associations with Disease Severity and Organ-Specific Activity across 5 Registries in the Lupus Federated Data Network (LUPUSNET)",
+   title_zh:"SLE 系統性治療模式：跨 5 登錄之疾病嚴重度與器官特異性活動度關聯（LUPUSNET）",
+   points:[
+     "整合 4 地理區域 5 個 SLE 登錄（APLC、RELESSER、FORWARD、Almenara、GLADEL）。",
+     "採聯邦式資料網絡,資料留存各登錄、僅共享彙總結果。",
+     "DORIS 緩解（OR 2.48）與 LLDAS（OR 2.60）與較高的可接受症狀狀態相關。",
+     "為跨區域治療模式與疾病嚴重度關聯提供大型真實世界證據。"]},
+  {id:"POS1070", pop:"adult", section:"guideline", gtype:"緩解達成 / 真實世界", drug:"達標（緩解）",
+   title_en:"Remission Achievement in SLE: Real-World Evidence from the AZAHAR Study in Spain",
+   title_zh:"SLE 緩解達成：西班牙 AZAHAR 研究之真實世界證據",
+   points:[
+     "152 名患者納入,142 名追蹤 6 個月、96 名追蹤 12 個月。",
+     "黏膜皮膚（80.8%）與關節（69.5%）為最常見領域。",
+     "Anifrolumab 治療者疾病活動度改善、6 與 12 個月達臨床緩解、復發較少較輕。",
+     "支持 anifrolumab 落實 EULAR 2023 達標治療典範。"]},
+  {id:"AB1096", pop:"adult", section:"guideline", gtype:"定義驗證（LLDAS）", drug:"修訂版 LLDAS",
+   title_en:"Validation of the Revised Definition of Lupus Low Disease Activity and its Prognostic Significance in SLE",
+   title_zh:"修訂版狼瘡低疾病活動度定義之驗證及其於 SLE 之預後意義",
+   points:[
+     "EULAR 將 LLDAS 之容許類固醇劑量下修至 ≤5mg,尚無研究驗證此修訂定義。",
+     "納入 299 名患者,年度追蹤 4 年。",
+     "評估與器官損傷、疾病復發及生活品質之關聯。",
+     "驗證更嚴格 LLDAS 定義的預後價值。"]},
+  {id:"AB1116", pop:"adult", section:"guideline", gtype:"分類工具驗證（SLERPI/AI）", drug:"SLERPI（機器學習）",
+   title_en:"Validation of the SLE Risk Probability Index (SLEPRI) for Early Diagnosis and Prognostic Assessment in a Retrospective SLE Cohort",
+   title_zh:"SLE 風險機率指數（SLERPI）於早期診斷與預後評估之驗證：回溯性 SLE 世代",
+   points:[
+     "SLERPI 為機器學習工具,支援準確且及時的 SLE 分類。",
+     "納入 450 名風濕病患者（65.3% SLE）。",
+     "83.7% SLE 患者符合 2019 EULAR/ACR 標準,86.7% 經 SLERPI 分類為 SLE（平均 12.0 分）。",
+     "驗證 SLERPI 之分類效能並依復發風險分層。"]},
+  {id:"AB1158", pop:"adult", section:"guideline", gtype:"結果測量驗證（CLASI-A）", drug:"CLASI-A",
+   title_en:"Validation of Cutaneous Lupus Erythematosus Disease Area and Severity Index-Activity (CLASI-A) for Evaluation of Patients with CLE in Clinical Trials",
+   title_zh:"皮膚型狼瘡疾病範圍與嚴重度指數–活動度（CLASI-A）於臨床試驗評估之驗證",
+   points:[
+     "CLASI-A 為臨床醫師報告之皮膚活動度測量工具,涵蓋 13 個身體部位,分數 0–70。",
+     "內容效度已獲支持,並廣泛用於多項臨床研究。",
+     "本研究進一步評估其心理計量學特性。",
+     "支持 CLASI-A 作為 CLE 臨床試驗的可靠活動度量測。"]},
+  {id:"AB1216", realId:"AB1216", pop:"adult", section:"guideline", gtype:"分類工具應用（SLERPI）", drug:"SLERPI 評分系統",
+   title_en:"Application of the SLERPI Scoring System as a Classification Tool for SLE and its Predictive Role in Early Disease Recognition",
+   title_zh:"SLERPI 評分系統作為 SLE 分類工具之應用及其於早期疾病辨識之預測角色",
+   points:[
+     "評估 SLERPI 評分系統作為 SLE 分類工具的應用。",
+     "分析其於早期疾病辨識的預測角色。",
+     "支援更早期、準確的 SLE 診斷。",
+     "與 2019 EULAR/ACR 分類標準互補。"]},
+
+  // ============ 成人：疾病特徵 / 共病 / 真實世界（歸於 realworld） ============
+  {id:"OP0338", pop:"adult", section:"realworld", drugClass:"疾病結果 / 腎臟", drug:"（多種治療）",
+   trial:"APLC 多國世代", design:"縱貫觀察世代", n:"3,215 名", country:"亞太多國",
+   indication:"SLE（腎功能下降）",
+   title_en:"Longitudinal Analysis of Kidney Function Decline in SLE: Correlation with Low Disease Activity and Patient Characteristics",
+   title_zh:"SLE 腎功能下降之縱貫分析：與低疾病活動度及患者特徵之關聯",
+   bg:"評估 SLE 患者腎功能（eGFR）長期下降軌跡及其與低疾病活動度、患者特徵之關聯。",
+   results:"3,215 名患者（中位 39 歲,女性 91.8%,亞洲 88.1%),29,278 次就診。基線 CKD≥G3 者年齡較大、病程較長、漿膜炎與腎臟、神經受累較多。達成 LLDAS50 與 eGFR 下降減緩相關（獨立於年齡、基線 eGFR 與腎臟受累)。",
+   concl:"腎功能損傷於 SLE 常見;維持低疾病活動度與較緩的腎功能下降相關。"},
+  {id:"POS0308", pop:"adult", section:"realworld", drugClass:"共病 / 心血管", drug:"（心血管風險評估）",
+   trial:"單中心比較", design:"橫斷面比較研究", n:"726 名", country:"希臘",
+   indication:"SLE（動脈僵硬度）",
+   title_en:"Arterial Stiffness in SLE vs Rheumatoid Arthritis, Diabetes Mellitus, and Healthy Controls: The Impact of Traditional Cardiovascular Risk Factor Burden and Low Disease Activity",
+   title_zh:"SLE 動脈僵硬度對比類風濕性關節炎、糖尿病與健康對照：傳統心血管風險負擔與低疾病活動度之影響",
+   bg:"SLE 心血管病風險升高,傳統預測工具常低估;本研究比較 SLE 與 RA、糖尿病、健康對照之動脈僵硬度。",
+   results:"726 名（200 SLE 與對照配對）。以頸股脈波傳導速度與增益指數評估;AIx@75 於 SLE 高於健康對照與糖尿病患者,並分析傳統與疾病相關風險因子及亞臨床動脈硬化之關聯。",
+   concl:"SLE 動脈僵硬度升高,凸顯傳統工具低估其心血管風險。"},
+  {id:"POS1061", pop:"adult", section:"realworld", drugClass:"疾病結果 / 腎臟", drug:"（誘導治療）",
+   trial:"單中心世代", design:"觀察性世代", n:"LN 世代", country:"日本",
+   indication:"低蛋白尿狼瘡腎炎",
+   title_en:"Long-Term Outcomes of Lupus Nephritis with Low Proteinuria at Diagnosis",
+   title_zh:"診斷時低蛋白尿之狼瘡腎炎長期結果",
+   bg:"EULAR 2025 強調早期辨識腎臟受累與深度緩解;本研究探討診斷時低蛋白尿（UPCR<1）LN 患者的長期結果。",
+   results:"以 Kaplan–Meier 分析完全腎臟反應（CRR,UPCR<0.5 且 eGFR≥60）累積率,依基線蛋白尿分為低（<1）與高（≥1）蛋白尿組比較 CRR 與無復發機率。",
+   concl:"支持 EULAR 2025 早期診斷低蛋白尿 LN 的重要性。"},
+  {id:"AB1153", pop:"adult", section:"realworld", drugClass:"共病 / 感染", drug:"（免疫抑制相關）",
+   trial:"全國族群研究", design:"全國族群研究", n:"全國資料", country:"韓國",
+   indication:"SLE（肺囊蟲肺炎）",
+   title_en:"Pneumocystis Pneumonia in SLE: A Nationwide Population-Based Study in Korea",
+   title_zh:"SLE 之肺囊蟲肺炎：韓國全國族群研究",
+   bg:"肺囊蟲肺炎（PCP）為免疫抑制者的致命併發症;SLE 患者因免疫抑制治療風險升高,但發生率低、預防指徵不明。",
+   results:"運用韓國全國族群資料評估 SLE 患者 PCP 的發生率與風險因子,為 PCP 預防的患者選擇提供依據。",
+   concl:"釐清 SLE 患者 PCP 風險因子與預防指徵。"},
+  {id:"POS0684", pop:"adult", section:"realworld", drugClass:"疾病結果 / 生存", drug:"（整體治療進展）",
+   trial:"統合迴歸分析", design:"系統性回顧與統合迴歸", n:"296 研究", country:"國際",
+   indication:"SLE（生存趨勢）",
+   title_en:"Survival Continues to Improve in the 21st Century in Patients with SLE - A Meta-Regression Analysis",
+   title_zh:"21 世紀 SLE 患者生存持續改善——統合迴歸分析",
+   bg:"SLE 生存被認為近二十年已停滯,但缺乏穩健統計驗證;本統合迴歸分析檢驗 2000 年後生存是否持續改善。",
+   results:"納入 296 研究。2000→2020:5 年生存 90.51%→94.11%、10 年 81.35%→90.88%、15 年 77.63%→83.66%、20 年 73.23%→83.36%,呈持續上升。",
+   concl:"21 世紀 SLE 生存持續改善,反映現代治療進展。"},
+  {id:"POS0692", pop:"adult", section:"realworld", drugClass:"用藥依從性", drug:"（含羥氯奎寧）",
+   trial:"觀察研究（Type1&2 模型）", design:"觀察性研究", n:"分型世代", country:"美國",
+   indication:"SLE（依從性）",
+   title_en:"Lupus Patients with Concurrent Inflammatory Activity and Symptom Burdens Have the Lowest Medication Adherence and Experience Distinct Adherence Barriers",
+   title_zh:"同時具發炎活動與症狀負擔之狼瘡患者用藥依從性最低且面臨獨特依從障礙",
+   bg:"依「第 1 型與第 2 型 SLE 模型」分類患者,探討用藥依從性差異。",
+   results:"同時具高第 1 型（發炎）與高第 2 型（症狀負擔）活動的患者依從性最低,並呈現獨特依從障礙模式,延續先前羥氯奎寧血中濃度的證據。",
+   concl:"建議將 Type1&2 模型納入照護,辨識依從性風險最高的患者。"},
+  {id:"AB1070", pop:"adult", section:"realworld", drugClass:"類固醇遞減", drug:"Glucocorticoids",
+   trial:"回溯性世代", design:"回溯性世代研究", n:"SLE 世代", country:"葡萄牙",
+   indication:"SLE（類固醇遞減後復發）",
+   title_en:"Predictors of Flare in SLE after Glucocorticoid Tapering: A Retrospective Cohort Study",
+   title_zh:"SLE 類固醇遞減後復發之預測因子：回溯性世代研究",
+   bg:"類固醇仍是控制復發核心,但長期暴露具毒性,可行時應遞減;惟此舉可能誘發復發。",
+   results:"探討 SLE 患者類固醇遞減後復發的預測因子,評估低劑量潑尼松驟停等情境的復發風險。",
+   concl:"辨識減量過程中復發高風險患者,以指引更安全的遞減策略。"},
+  {id:"POS0695b", realId:"POS0696", pop:"adult", section:"realworld", drugClass:"重症處置 / 血漿置換", drug:"Plasma Exchange",
+   trial:"全國住院資料", design:"全國住院資料庫分析", n:">120 萬住院", country:"美國",
+   indication:"SLE（血漿置換結果）",
+   title_en:"Utilization and In-Hospital Outcomes of Plasma Exchange (PLEX) in SLE and Vasculitis Hospitalizations",
+   title_zh:"血漿置換（PLEX）於 SLE 與血管炎住院之使用與院內結果",
+   bg:"評估血漿置換（PLEX）於 SLE 與血管炎住院的使用率與院內結果。",
+   results:"1,226,485 次 SLE 與 341,704 次血管炎住院中,PLEX 使用率分別 0.37% 與 5.09%;PLEX 接受者以較年輕、女性、非裔或白人為主,院內死亡率、嚴重併發症與資源使用顯著較高。",
+   concl:"PLEX 僅用於少數住院;需更精準的患者選擇。"},
+
+  // ============ 相關但非 SLE（依清單納入，已標註） ============
+  {id:"OP0123", pop:"adult", section:"clinical", drugClass:"anti-CD20（Rituximab）", drug:"Rituximab",
+   trial:"REDUCE PMR 1", design:"雙盲、隨機、安慰劑對照試驗", n:"多中心", country:"荷蘭",
+   indication:"※非 SLE：風濕性多發性肌痛",
+   title_en:"Rituximab as a Glucocorticoid-Sparing Therapy in Newly Diagnosed Polymyalgia Rheumatica: A Randomized Controlled Trial (REDUCE PMR 1)",
+   title_zh:"Rituximab 作為新診斷風濕性多發性肌痛之類固醇節省療法：隨機對照試驗（REDUCE PMR 1）",
+   bg:"【註：本研究為風濕性多發性肌痛（PMR），非 SLE，依您清單一併納入】PMR 常需長期類固醇;methotrexate 為現行第一線類固醇節省療法,rituximab 於小型概念驗證試驗呈現潛力。",
+   results:"於新診斷 PMR 進行雙盲、隨機、安慰劑對照試驗,確認 rituximab 的類固醇節省效果（為 PMR 適應症,非 SLE）。",
+   concl:"評估 rituximab 作為 PMR 類固醇節省療法之療效。"},
+  {id:"OP0232", pop:"adult", section:"clinical", drugClass:"anti-CD20（Rituximab）", drug:"Rituximab + Belimumab",
+   trial:"序貫療法 RCT", design:"隨機研究（序貫療法）", n:"PR3-AAV 族群", country:"英國",
+   indication:"※非 SLE：PR3 ANCA 相關血管炎",
+   title_en:"A Randomised Study of Rituximab and Belimumab Sequential Therapy in PR3 ANCA-Associated Vasculitis",
+   title_zh:"Rituximab 與 Belimumab 序貫療法治療 PR3 ANCA 相關血管炎之隨機研究",
+   bg:"【註：本研究為 ANCA 相關血管炎，非 SLE，依您清單一併納入】BAFF 拮抗合併 CD20 B 細胞清除可能強化 ANCA 抑制與疾病控制。",
+   results:"比較 belimumab（對安慰劑）合併單次 rituximab 與類固醇,於 PR3-AAV 達成 PR3 ANCA 陰性之療效（為血管炎適應症,非 SLE）。",
+   concl:"評估 rituximab+belimumab 序貫療法於 PR3-AAV 的療效。"},
+
+  // ============ 兒童 / 青少年 SLE ============
+  {id:"AB0522", pop:"pediatric", section:"realworld", drugClass:"Belimumab（BLyS/BAFF）", drug:"Belimumab", star:true,
+   trial:"德國 BIKER 登錄", design:"真實世界登錄", n:"jSLE 世代", country:"德國",
+   indication:"兒童 SLE（jSLE）",
+   title_en:"Belimumab in Juvenile SLE: Real-World Data from the German BIKER-Registry",
+   title_zh:"Belimumab 治療兒童 SLE：德國 BIKER 登錄之真實世界資料",
+   bg:"Belimumab 為首個獲核准用於 5 歲以上兒童 SLE 的生物製劑,結合可溶性 BLyS/BAFF 抑制 B 細胞活化。",
+   results:"運用德國 BIKER 登錄呈現 belimumab 於 jSLE 的真實世界使用、疾病活動度改善、類固醇節省與長期安全性資料。",
+   concl:"為兒童風濕科 belimumab 臨床決策提供實證依據。"},
+  {id:"AB1097", pop:"pediatric", section:"realworld", drugClass:"Belimumab（BLyS/BAFF）", drug:"Belimumab", star:true,
+   trial:"多國真實世界 / PK", design:"真實世界藥動學研究", n:"95 名", country:"瑞典等",
+   indication:"SLE（含青少年；血中濃度）",
+   title_en:"Blood Concentrations of Belimumab in Relation to DORIS Remission and LLDAS in Patients with SLE",
+   title_zh:"Belimumab 血中濃度與 SLE 患者 DORIS 緩解及 LLDAS 之關係",
+   bg:"探討 belimumab 血中濃度與 DORIS 緩解及 LLDAS 達成的關係。",
+   results:"95 名患者（89% 女性,中位病程 8.4 年,基線中位 SLEDAI-2K 8.0、潑尼松 10mg/日）。達 DORIS 與 LLDAS 比例 24 個月逐步上升至 33% 與 44%;血中濃度與達標無關（P=0.27）。",
+   concl:"血中濃度非療效決定因子,支持探討較低劑量。"},
+  {id:"POS1375", pop:"pediatric", section:"realworld", drugClass:"疾病結果 / 心血管", drug:"（結果與風險評估）",
+   trial:"縱貫比較", design:"縱貫比較評估", n:"JSLE vs JDM 世代", country:"英國",
+   indication:"兒童 SLE（成年期結果）",
+   title_en:"Longitudinal Outcomes of Juvenile SLE and Juvenile Dermatomyositis: Damage and Cardiovascular Risk in Adulthood",
+   title_zh:"兒童 SLE 與兒童皮肌炎之長期結果：成年期損傷與心血管風險",
+   bg:"首個比較兒童 SLE（JSLE）與兒童皮肌炎（JDM）成年期損傷與心血管風險（CVR）的縱貫評估。",
+   results:"校正年齡與病程後,JSLE 青年具顯著較高 CVR 與累積損傷;傳統 10 年 CVR 評分一致低估,僅 PDAY 工具能有效分層,揭示疾病相關因子為 JSLE CVR 升高主因。",
+   concl:"強調須驗證 PDAY 並發展疾病專屬心血管風險模型。"},
+  {id:"OP0341_peds", realId:"OP0341", pop:"pediatric", section:"clinical", drugClass:"CD19 CAR-T / 細胞療法", drug:"Obe-cel (CD19 CAR-T)",
+   trial:"CARLYSLE（含青少年）", design:"單臂、開放標籤、劑量探索第 I 期", n:"含 2 名青少年", country:"國際",
+   indication:"重症難治型 SLE（含青少年）",
+   title_en:"Obecabtagene Autoleucel (Obe-cel) CD19 CAR T-cell Therapy in Severe Refractory SLE: Phase I (CARLYSLE) — Adolescent Subgroup",
+   title_zh:"Obe-cel（CD19 CAR-T）治療重症難治型 SLE：第 I 期（CARLYSLE）— 含青少年",
+   bg:"CARLYSLE 第 I 期 11 名輸注者中包含 2 名青少年,評估自體 CD19 CAR-T 之安全性與療效。",
+   results:"全體無 ICANS 或 ≥2級 CRS;50M 組 5/6 達 DORIS 緩解,3/6 達完全腎臟反應;含青少年在內呈現 anti-dsDNA 下降、C3 上升與腎臟改善。",
+   concl:"早期資料支持 obe-cel 於含青少年之重症難治型 SLE。"},
+];
+
+</script>
+<script>
+/* ====== config ====== */
+const SECTIONS = [
+  {key:"clinical", zh:"臨床研究", en:"Clinical Studies & Trials", cls:"sec-clin"},
+  {key:"realworld", zh:"真實世界研究", en:"Real-World Evidence", cls:"sec-rw"},
+  {key:"guideline", zh:"指引・達標治療・結果測量・分類標準", en:"Guidelines · Treat-to-Target · Outcome Measures · Classification", cls:"sec-gl"},
+];
+// drug-class ordering: JAKi first, Belimumab pinned right after (handled by star+order)
+const CLASS_ORDER = [
+  "JAK/TYK2 抑制劑",
+  "Belimumab（BLyS/BAFF）",
+  "BLyS/APRIL（Telitacicept）",
+  "anti-CD20（Obinutuzumab）",
+  "anti-CD20（Rituximab）",
+  "anti-CD38 抗體",
+  "CD19 CAR-T / 細胞療法",
+  "CD19 T 細胞銜接器",
+  "anti-IFNAR（Anifrolumab）",
+  "anti-BDCA2 抗體",
+  "FcRn 阻斷劑",
+  "mTOR 抑制劑",
+  "TLR7/8 抑制劑",
+  "BTK 抑制劑",
+  "SGLT2 抑制劑",
+  "鈣調磷酸酶抑制劑（Voclosporin）",
+  "生物製劑啟動時機",
+  "疾病結果 / 腎臟",
+  "共病 / 心血管",
+  "共病 / 感染",
+  "用藥依從性",
+  "類固醇遞減",
+  "重症處置 / 血漿置換",
+  "疾病結果 / 生存",
+];
+function classRank(c){const i=CLASS_ORDER.indexOf(c); return i<0?999:i;}
+
+/* ====== state ====== */
+let curPop = "adult";
+const filt = {section:new Set(), drugClass:new Set(), indication:new Set()};
+
+/* ====== helpers ====== */
+function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+// wrap numbers / % / p-values / key stats in highlight
+function hl(t){
+  if(!t) return "";
+  let s = esc(t);
+  // percentages, ratios like 53.5%, p<0.001, OR 2.48, −110.5, 13.61/100
+  s = s.replace(/(p\s*[<=>]\s*0?\.\d+|P\s*[<=>]\s*0?\.\d+)/g,'<span class="num">$1</span>');
+  s = s.replace(/(\d+(?:\.\d+)?\s*%)/g,'<span class="num">$1</span>');
+  s = s.replace(/((?:OR|HR|差異|RR|AUC|Kendall[’']s W)[^,;。:]{0,3}=?\s*[<≥>]?\s*−?\d+(?:\.\d+)?)/g,'<span class="num">$1</span>');
+  s = s.replace(/(−?\d+(?:\.\d+)?\s*(?:IU\/mL|mg\/L|g\/L|mg\/kg|mg\/day|mg\/日|個月|名|次))/g,'<span class="num">$1</span>');
+  return s;
+}
+function popLabel(p){return p==="pediatric"?"兒童":"成人";}
+
+/* ====== flashcard (drug) ====== */
+function drugCard(d){
+  const secColor = d.section==="clinical"?"var(--clin)":(d.section==="realworld"?"var(--rw)":"var(--gl)");
+  const clsBg = d.section==="clinical"?"var(--clin-bg)":"var(--rw-bg)";
+  const clsFg = d.section==="clinical"?"var(--clin)":"var(--rw)";
+  const id = d.realId || d.id;
+  const star = d.star? `<div class="startag">★ 重點</div>`:"";
+  const m = META[id] || {};
+  const ev = m.evidence || (d.section==="clinical"?"clinical":"realworld");
+  const evBadge = ev==="clinical"
+    ? `<span class="ev-badge ev-clin">臨床研究</span>`
+    : `<span class="ev-badge ev-rw">真實世界</span>`;
+  const designTags = (m.design||[]).map(t=>`<span class="dtag">${esc(t)}</span>`).join("");
+  function info(lbl,val){ return val? `<div class="finfo"><span class="fil">${lbl}</span><span class="fiv">${esc(val)}</span></div>`:""; }
+  const doi = (typeof DOI!=="undefined" && DOI[id]) ? DOI[id] : "";
+  const cite = doi
+    ? `Ann Rheum Dis 2026;85(Suppl). DOI: ${doi}`
+    : `Ann Rheum Dis 2026;85(Suppl).`;
+  return `<div class="card" data-id="${d.id}">
+    <div class="card-inner">
+      <div class="face front">
+        <div class="cband" style="background:${secColor}"></div>
+        <div class="idtag">${esc(id)}</div>${star}
+        <div class="cls-pill" style="background:${clsBg};color:${clsFg}">${esc(d.drugClass)}</div>
+        <div class="drugname${(d.drug||'').length>22?' dn-sm':((d.drug||'').length>14?' dn-md':'')}">${esc(d.drug)}</div>
+        <div class="trialname">${esc(d.trial)}</div>
+        <div class="ev-row">${evBadge}</div>
+        <div class="dtags">${designTags||`<span class="dtag">${esc(d.design||"")}</span>`}</div>
+        <div class="finfo-grid">
+          ${info("適應症", m.subtype||d.indication)}
+          ${info("收案數", m.n||d.n)}
+          ${info("國家／地區", m.country||d.country)}
+          ${info("收納期間", m.enroll)}
+          ${info("統計時間點", m.week)}
+        </div>
+        <div class="cref">${esc(cite)}</div>
+        <div class="flip-hint">點擊翻面 ⟲</div>
+      </div>
+      <div class="face back">
+        <div class="bid">${esc(id)} · ${popLabel(d.pop)}</div>
+        <div class="ten">${esc(d.title_en)}</div>
+        <div class="tzh">${esc(d.title_zh)}</div>
+        <div class="scroll">
+          <span class="lbl bg">背景・目的・方法</span>
+          <p>${hl(d.bg)}</p>
+          <span class="lbl re">結果 Results</span>
+          <p class="res">${hl(d.results)}</p>
+          <span class="lbl co">結論 Conclusion</span>
+          <p>${hl(d.concl)}</p>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ====== guideline card ====== */
+function guidelineCard(d){
+  const id = d.realId || d.id;
+  const lis = d.points.map(p=>`<li>${hl(p)}</li>`).join("");
+  return `<div class="gcard" data-id="${d.id}">
+    <div class="ghead">
+      <span class="gtag">${esc(d.gtype)}</span>
+      <span class="gid">${esc(id)}</span>
+    </div>
+    <h4>${esc(d.title_zh)}</h4>
+    <div class="gen">${esc(d.title_en)}</div>
+    <ul>${lis}</ul>
+    ${d.drug?`<span class="gdrug">${esc(d.drug)}</span>`:""}
+  </div>`;
+}
+
+/* ====== filter match ====== */
+function matches(d){
+  if(filt.section.size && !filt.section.has(d.section)) return false;
+  if(filt.drugClass.size && !filt.drugClass.has(d.drugClass)) return false;
+  if(filt.indication.size && !filt.indication.has(d.indication||"")) return false;
+  return true;
+}
+
+/* ====== render a page ====== */
+function renderPage(pop){
+  const host = document.getElementById("page-"+pop);
+  const rows = DATA.filter(d=>d.pop===pop && matches(d));
+  let html="";
+  SECTIONS.forEach(sec=>{
+    const items = rows.filter(d=>d.section===sec.key);
+    if(!items.length && (filt.section.size||filt.drugClass.size||filt.indication.size)) {
+      // skip empty section when filtering
+    }
+    html += `<div class="block ${sec.cls}">
+      <div class="block-head">
+        <span class="dot"></span>
+        <h3>${sec.zh}</h3>
+        <span class="en serif">${sec.en}</span>
+        <span class="cnt">${items.length}</span>
+      </div>
+      <div class="block-rule"></div>
+      <div class="grid${sec.key==="guideline"?" grid-gl":""}">`;
+    if(!items.length){
+      html += `<div class="empty">— 此區塊在目前篩選下無研究 —</div>`;
+    } else if(sec.key==="guideline"){
+      // guideline cards, sorted by gtype
+      items.sort((a,b)=> (a.gtype||"").localeCompare(b.gtype||"","zh"));
+      items.forEach(d=> html+=guidelineCard(d));
+    } else {
+      // group by drug class, ordered; tall cards if long
+      const groups={};
+      items.forEach(d=>{(groups[d.drugClass]=groups[d.drugClass]||[]).push(d);});
+      const classes=Object.keys(groups).sort((a,b)=>classRank(a)-classRank(b));
+      // determine if any card in page section is long -> use tall uniformly per row handled via class on each card
+      classes.forEach(cls=>{
+        const isBeli = cls.indexOf("Belimumab")===0;
+        html += `<div class="grp-label"><span class="bar"></span><span>${esc(cls)}</span>${isBeli?'<span class="pin">★ 本次重點</span>':''}<span class="gc"></span></div>`;
+        groups[cls].forEach(d=> html+=drugCard(d));
+      });
+    }
+    html += `</div></div>`;
+  });
+  host.innerHTML = html;
+  // attach flip
+  host.querySelectorAll(".card").forEach(c=>{
+    c.addEventListener("click",()=>c.classList.toggle("flipped"));
+  });
+  // make cards tall if back content long (after layout) — set tall for long-text cards
+  host.querySelectorAll(".card").forEach(c=>{
+    const back=c.querySelector(".back .scroll");
+    if(back && back.scrollHeight>back.clientHeight+8) c.classList.add("tall");
+  });
+}
+
+/* ====== build filters ====== */
+function buildFilters(){
+  // sections
+  const secWrap=document.getElementById("f-section");
+  secWrap.innerHTML = SECTIONS.map(s=>{
+    const ct=DATA.filter(d=>d.pop===curPop && d.section===s.key).length;
+    return `<button class="fbtn" data-type="section" data-val="${s.key}">${s.zh}<span class="ct">${ct}</span></button>`;
+  }).join("");
+  // drug classes (only those present, ordered)
+  const clsWrap=document.getElementById("f-class");
+  const present=[...new Set(DATA.filter(d=>d.pop===curPop && d.drugClass).map(d=>d.drugClass))].sort((a,b)=>classRank(a)-classRank(b));
+  clsWrap.innerHTML = present.map(c=>{
+    const ct=DATA.filter(d=>d.pop===curPop && d.drugClass===c).length;
+    return `<button class="fbtn" data-type="drugClass" data-val="${esc(c)}">${esc(c)}<span class="ct">${ct}</span></button>`;
+  }).join("");
+  // indications
+  const indWrap=document.getElementById("f-indication");
+  const inds=[...new Set(DATA.filter(d=>d.pop===curPop && d.indication).map(d=>d.indication))].sort((a,b)=>a.localeCompare(b,"zh"));
+  indWrap.innerHTML = inds.map(c=>{
+    const ct=DATA.filter(d=>d.pop===curPop && d.indication===c).length;
+    return `<button class="fbtn" data-type="indication" data-val="${esc(c)}">${esc(c)}<span class="ct">${ct}</span></button>`;
+  }).join("");
+  // bind
+  document.querySelectorAll(".fbtn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const t=b.dataset.type, v=b.dataset.val;
+      if(filt[t].has(v)){filt[t].delete(v); b.classList.remove("on");}
+      else{filt[t].add(v); b.classList.add("on");}
+      renderPage(curPop);
+    });
+  });
+}
+
+/* ====== comparison page ====== */
+function evMini(ev){
+  return ev==="clinical"?`<span class="minib mb-clin">臨床</span>`:`<span class="minib mb-rw">真實世界</span>`;
+}
+function sigCell(sig){
+  if(!sig) return `<span class="t-sig sig-na">—</span>`;
+  if(/^p|P|顯著|α/.test(sig)) return `<span class="t-sig sig-p">${esc(sig)}</span>`;
+  if(sig==="RWE") return `<span class="t-sig sig-rwe">真實世界</span>`;
+  if(sig==="單臂") return `<span class="t-sig sig-arm">單臂・無對照</span>`;
+  if(sig==="指引") return `<span class="t-sig sig-gl">指引</span>`;
+  return `<span class="t-sig sig-na">${esc(sig)}</span>`;
+}
+function valCell(v){
+  // highlight numbers & vs
+  let s=esc(v).replace(/(\d+(?:\.\d+)?)/g,'<span class="hi">$1</span>').replace(/ vs /g,' <span style="color:#8590a8">vs</span> ');
+  return `<span class="t-val">${s}</span>`;
+}
+function renderCompare(){
+  const host=document.getElementById("page-compare");
+  let html = `<div class="cmp-intro">
+    <h2>📊 臨床數據比較</h2>
+    <p>將不同研究中<b>相同的臨床指標</b>並列比較，依適應症分為各大表格；安全性另置於最後。各研究為獨立的試驗或真實世界研究，跨研究數字不可直接對比，僅供整體概覽。每筆均標示研究名稱、藥物與證據等級。</p>
+    <div class="cmp-legend">
+      <span><b class="tb-clin">臨床</b> 臨床研究（試驗）</span>
+      <span><b class="tb-rw">真實世界</b> 真實世界／觀察研究</span>
+    </div>
+  </div>`;
+
+  // efficacy tables by indication
+  Object.keys(COMPARE).forEach(key=>{
+    const blk=COMPARE[key];
+    html += `<div class="cmp-block">
+      <div class="cmp-head"><span class="bar"></span><h3>${esc(key)}</h3></div>
+      <div class="cmp-note">${blk.note}</div>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr>
+          <th style="width:22%">研究</th>
+          <th style="width:16%">藥物</th>
+          <th style="width:12%">類型</th>
+          <th style="width:13%">時間點</th>
+          <th style="width:21%">數據</th>
+          <th style="width:16%">顯著性</th>
+        </tr></thead><tbody>`;
+    blk.metrics.forEach(met=>{
+      html += `<tr class="metric-row"><td colspan="6">▎${esc(met.name)}${met.unit?`（${esc(met.unit)}）`:""}</td></tr>`;
+      met.rows.forEach(r=>{
+        html += `<tr>
+          <td><span class="t-study">${esc(r.study)}</span> <span class="t-id">${esc(r.id)}</span></td>
+          <td><span class="t-drug">${esc(r.drug)}</span></td>
+          <td>${evMini(r.ev)}</td>
+          <td>${esc(r.week||"—")}</td>
+          <td>${valCell(r.val)}</td>
+          <td>${sigCell(r.sig)}</td>
+        </tr>`;
+      });
+    });
+    html += `</tbody></table></div></div>`;
+  });
+
+  // safety table
+  html += `<div class="cmp-block">
+    <div class="cmp-head"><span class="bar" style="background:var(--accent)"></span><h3>安全性比較</h3><span class="badge-saf">Safety</span></div>
+    <div class="cmp-note">${SAFETY.note}</div>
+    <div class="tbl-wrap"><table class="cmp">
+      <thead><tr>
+        <th style="width:22%">研究</th>
+        <th style="width:16%">藥物</th>
+        <th style="width:12%">類型</th>
+        <th style="width:50%">安全性發現</th>
+      </tr></thead><tbody>`;
+  SAFETY.metrics.forEach(met=>{
+    html += `<tr class="metric-row"><td colspan="4">▎${esc(met.name)}</td></tr>`;
+    met.rows.forEach(r=>{
+      html += `<tr>
+        <td><span class="t-study">${esc(r.study)}</span> <span class="t-id">${esc(r.id)}</span></td>
+        <td><span class="t-drug">${esc(r.drug)}</span></td>
+        <td>${evMini(r.ev)}</td>
+        <td><span class="t-val">${esc(r.val)}</span></td>
+      </tr>`;
+    });
+  });
+  html += `</tbody></table></div></div>`;
+
+  host.innerHTML=html;
+}
+
+/* ====== tabs ====== */
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    const sel=t.dataset.pop;
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("page-"+sel).classList.add("active");
+    const aside=document.querySelector("aside");
+    if(sel==="compare"){
+      aside.style.display="none";
+      renderCompare();
+      return;
+    }
+    aside.style.display="";
+    curPop=sel;
+    // reset filters on pop switch
+    filt.section.clear(); filt.drugClass.clear(); filt.indication.clear();
+    buildFilters();
+    renderPage(curPop);
+  });
+});
+document.getElementById("clearAll").addEventListener("click",()=>{
+  filt.section.clear(); filt.drugClass.clear(); filt.indication.clear();
+  document.querySelectorAll(".fbtn.on").forEach(b=>b.classList.remove("on"));
+  renderPage(curPop);
+});
+
+/* ====== init ====== */
+buildFilters();
+renderPage("adult");
+renderPage("pediatric");
+
+</script>
+</body>
+</html>
