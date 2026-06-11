@@ -1,1 +1,1 @@
-# 2026EULARsummary
+# 2026-EULAR-summary
